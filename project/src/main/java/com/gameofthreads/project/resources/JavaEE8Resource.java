@@ -1,4 +1,4 @@
-package com.mycompany.project.resources;
+package com.gameofthreads.project.resources;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
