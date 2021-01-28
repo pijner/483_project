@@ -14,6 +14,9 @@ import static org.junit.Assert.*;
 
 /**
  * TODO: this class can be deleted once we have actual classes/tests
+ * 
+ * To run this class, right click the source file that the tests are made for 
+ * (ExampleClass.java, in this case), and select "Test File". 
  */
 public class ExampleClassTest {
     
