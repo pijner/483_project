@@ -1,4 +1,4 @@
-package com.mycompany.project;
+package com.gameofthreads.project;
 
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
