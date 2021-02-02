@@ -1,4 +1,9 @@
-# 483_project (Task/Shift Scheduler)
+# EasyShift
+
+    CSCI 483 Project
+    To be developed by
+    - Travis MacDonald
+    - Prahar Ijner
 
 ## The problem 
 Task scheduling is an activity that occurs in most businesses on a regular basis. The most obvious example of this would be scheduling full-time and part-time shifts for employees at a store and creating an optimal schedule could result in better employee satisfaction, customer satisfaction, and/or minimized costs. However, creating an optimal schedule involves several considerations like ensuring there is at least one experienced employee working on any given shift, accommodating everyone’s availability, selecting which employees should work together to get the best *results*. All in all, it is a time-consuming process.
