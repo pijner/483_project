@@ -1,4 +1,4 @@
-/* AUTOMATICALLY GENERATED ON Tue Jan 26 17:30:25 AST 2021*/
+/* AUTOMATICALLY GENERATED ON Thu Feb 18 21:07:35 AST 2021*/
 /* DO NOT EDIT */
 
 grant {
@@ -26,7 +26,6 @@ grant      principal * * {
 };
 
 grant      principal org.glassfish.security.common.Group "asadmin" {
-  permission javax.security.jacc.WebResourcePermission "/*:/theme/com/*:/theme/org/*:/theme/META-INF/*:/resource/*";
   permission javax.security.jacc.WebRoleRefPermission "default", "admin";
   permission javax.security.jacc.WebRoleRefPermission "microprofile-metrics-resource", "admin";
   permission javax.security.jacc.WebRoleRefPermission "FacesServlet", "admin";
@@ -36,10 +35,10 @@ grant      principal org.glassfish.security.common.Group "asadmin" {
   permission javax.security.jacc.WebRoleRefPermission "ThemeServlet", "admin";
   permission javax.security.jacc.WebRoleRefPermission "jsp", "admin";
   permission javax.security.jacc.WebRoleRefPermission "", "admin";
+  permission javax.security.jacc.WebResourcePermission "/*:/theme/com/*:/theme/org/*:/theme/META-INF/*:/resource/*";
 };
 
 grant      principal org.glassfish.security.common.PrincipalImpl "admin" {
-  permission javax.security.jacc.WebResourcePermission "/*:/theme/com/*:/theme/org/*:/theme/META-INF/*:/resource/*";
   permission javax.security.jacc.WebRoleRefPermission "default", "admin";
   permission javax.security.jacc.WebRoleRefPermission "microprofile-metrics-resource", "admin";
   permission javax.security.jacc.WebRoleRefPermission "FacesServlet", "admin";
@@ -49,5 +48,6 @@ grant      principal org.glassfish.security.common.PrincipalImpl "admin" {
   permission javax.security.jacc.WebRoleRefPermission "ThemeServlet", "admin";
   permission javax.security.jacc.WebRoleRefPermission "jsp", "admin";
   permission javax.security.jacc.WebRoleRefPermission "", "admin";
+  permission javax.security.jacc.WebResourcePermission "/*:/theme/com/*:/theme/org/*:/theme/META-INF/*:/resource/*";
 };
 
