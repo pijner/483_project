@@ -8,15 +8,16 @@ package com.gameofthreads.project;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Random;
 import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import org.primefaces.model.timeline.TimelineEvent;
 import org.primefaces.model.timeline.TimelineModel;
 
-@Named("customTimelineView")
+@Named("esTimelineView")
 @ViewScoped
-public class CustomTimelineView implements Serializable {  
+public class EsTimelineView implements Serializable {  
   
     private TimelineModel<String, ?> model;
     private LocalDateTime start;
@@ -38,11 +39,13 @@ public class CustomTimelineView implements Serializable {
             LocalDateTime end = start.minusHours(12).withMinute(0).withSecond(0).withNano(0);
 
             for (int i = 0; i < 5; i++) {
-                LocalDateTime start = end.plusHours(Math.round(Math.random() *5));
+                LocalDateTime start = end.plusHours(Math.round(Math.random() *10));
                 end = start.plusHours(4 + Math.round(Math.random() *5));
-
-                long r = Math.round(Math.random() * 2);  
-                String availability = (r == 0 ? "Unavailable" : (r == 1 ? "Available" : "Maybe"));  
+                   
+                Random rng = new Random();
+                
+                int r = rng.nextInt(2);
+                String availability = (r == 0 ? "Scheduled" : "Unavailable");  
   
                 // create an event with content, start / end dates, editable flag, group name and custom style class
                 TimelineEvent event = TimelineEvent.builder()

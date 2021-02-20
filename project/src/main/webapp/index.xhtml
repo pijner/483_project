@@ -16,6 +16,7 @@
         div.timeline-frame {
             border-color: #5D99C3;
             border-radius: 5px;
+            /*margin: 10px;*/
         }
 
         div.timeline-axis {
@@ -42,35 +43,41 @@
         }
 
         div.timeline-event {
+            min-height: 60px !important;
             color: white !important;
             border-radius: 5px !important;
         }
 
         div.timeline-event-content {
+            min-height: 60px !important;
             padding: 5px;
             text-shadow: none;
         }
 
         div.unavailable {
-            background: #F03030 none !important; /* red */
-            border-color: #bd2828 !important; /* red */
+            font-size: 0pt;
+            height: 60px;
+            padding-top: 5px !important;
+            padding-left: 5px;
+            margin: 0 0;
+            margin: 0px !important;
+            font-weight: bold;
+            border-radius: 0px !important;
+            background: #888888 none !important;
+            border-color: none !important;
         }
 
-        div.available {
-            background: #1AA11A none !important; /* green */
-            border-color: #136e13 !important; /* green */
-        }
-
-        div.maybe {
+        div.scheduled {
             font-size: 12pt;
             height: 60px;
+            color: #1a1f3c !important;
             padding-top: 5px !important;
             padding-left: 5px;
             margin: 0px !important;
             font-weight: bold;
             border-radius: 15px !important;
-            background: #CCEACE none !important; /* orange */
-            border-color: none !important; /* orange */
+            background: #CCEACE none !important;
+            border-color: none !important;
         }
 
         div.timeline-event-selected {
@@ -81,9 +88,9 @@
 
     <h:form id="form">
         <div class="card">
-            <p:timeline id="timeline" value="#{customTimelineView.model}"
-                        editable="true" eventMargin="10" eventMarginAxis="0"
-                        start="#{customTimelineView.start}" end="#{customTimelineView.end}"
+            <p:timeline id="timeline" value="#{esTimelineView.model}"
+                        editable="true" eventMargin="10"
+                        start="#{eslineView.start}" end="#{esTimelineView.end}"
                         stackEvents="false" widgetVar="timelineWdgt">
                 <f:facet name="menu">
                     <p:commandButton type="button" icon="pi pi-chevron-left" styleClass="p-ml-2" onclick="PF('timelineWdgt').move(-0.3);" />
