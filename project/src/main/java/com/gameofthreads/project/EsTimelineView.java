@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Random;
+import javax.annotation.ManagedBean;
 import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
@@ -22,9 +23,13 @@ public class EsTimelineView implements Serializable {
     private TimelineModel<String, ?> model;
     private LocalDateTime start;
     private LocalDateTime end;
+    
+    private boolean isEditable;
   
     @PostConstruct  
     public void init() {  
+        isEditable = false;
+        
         // set initial start / end dates for the axis of the timeline  
         start = LocalDate.of(-140, 1, 1).atStartOfDay();
         end = LocalDate.of(-140, 1, 2).atStartOfDay();
@@ -52,7 +57,7 @@ public class EsTimelineView implements Serializable {
                         .data(availability)
                         .startDate(start)
                         .endDate(end)
-                        .editable(true)
+                        .editable(false)
                         .group(name)
                         .styleClass(availability.toLowerCase())
                         .build();
@@ -72,5 +77,17 @@ public class EsTimelineView implements Serializable {
   
     public LocalDateTime getEnd() {
         return end;  
-    }  
+    }
+    
+    public boolean getIsEditable() {
+        return isEditable;
+    }
+    
+    public void setIsEditable(boolean isEditable) {
+        this.isEditable = isEditable;
+    }
+    
+    public void onEditButtonClick() {
+        isEditable = !isEditable;
+    }
 }
