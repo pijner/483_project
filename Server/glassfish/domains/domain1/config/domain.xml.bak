@@ -3,13 +3,13 @@
   <security-configurations>
     <authentication-service default="true" name="adminAuth" use-password-credential="true">
       <security-provider provider-name="adminSpc" name="spcrealm" type="LoginModule">
-        <login-module-config control-flag="sufficient" module-class="com.sun.enterprise.admin.util.AdminLoginModule" name="adminSpecialLM">
+        <login-module-config module-class="com.sun.enterprise.admin.util.AdminLoginModule" control-flag="sufficient" name="adminSpecialLM">
           <property name="config" value="server-config"></property>
           <property name="auth-realm" value="admin-realm"></property>
         </login-module-config>
       </security-provider>
       <security-provider provider-name="adminFile" name="filerealm" type="LoginModule">
-        <login-module-config control-flag="sufficient" module-class="com.sun.enterprise.security.auth.login.FileLoginModule" name="adminFileLM">
+        <login-module-config module-class="com.sun.enterprise.security.auth.login.FileLoginModule" control-flag="sufficient" name="adminFileLM">
           <property name="config" value="server-config"></property>
           <property name="auth-realm" value="admin-realm"></property>
         </login-module-config>
@@ -24,7 +24,7 @@
   <managed-job-config></managed-job-config>
   <monitoring-console-configuration></monitoring-console-configuration>
   <system-applications>
-    <application context-root="" object-type="system-admin" directory-deployed="true" name="__admingui" location="${com.sun.aas.installRootURI}/lib/install/applications/__admingui">
+    <application context-root="" object-type="system-admin" name="__admingui" directory-deployed="true" location="${com.sun.aas.installRootURI}/lib/install/applications/__admingui">
       <module name="__admingui">
         <engine sniffer="web"></engine>
         <engine sniffer="security"></engine>
@@ -51,7 +51,7 @@
     </jdbc-connection-pool>
     <managed-executor-service object-type="system-all" jndi-name="concurrent/__defaultManagedExecutorService"></managed-executor-service>
     <managed-scheduled-executor-service object-type="system-all" jndi-name="concurrent/__defaultManagedScheduledExecutorService"></managed-scheduled-executor-service>
-    <connector-connection-pool max-pool-size="250" resource-adapter-name="jmsra" steady-pool-size="1" name="jms/__defaultConnectionFactory-Connection-Pool" connection-definition-name="javax.jms.ConnectionFactory"></connector-connection-pool>
+    <connector-connection-pool resource-adapter-name="jmsra" max-pool-size="250" steady-pool-size="1" name="jms/__defaultConnectionFactory-Connection-Pool" connection-definition-name="javax.jms.ConnectionFactory"></connector-connection-pool>
     <connector-resource pool-name="jms/__defaultConnectionFactory-Connection-Pool" object-type="system-all-req" jndi-name="jms/__defaultConnectionFactory"></connector-resource>
     <context-service object-type="system-all" jndi-name="concurrent/__defaultContextService"></context-service>
     <managed-thread-factory object-type="system-all" jndi-name="concurrent/__defaultManagedThreadFactory"></managed-thread-factory>
@@ -59,6 +59,7 @@
   <servers>
     <server config-ref="server-config" name="server">
       <application-ref ref="__admingui" virtual-servers="__asadmin"></application-ref>
+      <application-ref ref="LoginProject-1.0" virtual-servers="server"></application-ref>
       <resource-ref ref="jdbc/__TimerPool"></resource-ref>
       <resource-ref ref="jdbc/__default"></resource-ref>
       <resource-ref ref="jdbc/sample"></resource-ref>
@@ -127,7 +128,7 @@
       <microprofile-fault-tolerance-configuration></microprofile-fault-tolerance-configuration>
       <rest-monitoring-configuration></rest-monitoring-configuration>
       <jms-service default-jms-host="default_JMS_host" type="EMBEDDED">
-        <jms-host port="${JMS_PROVIDER_PORT}" host="localhost" name="default_JMS_host"></jms-host>
+        <jms-host port="${JMS_PROVIDER_PORT}" name="default_JMS_host" host="localhost"></jms-host>
       </jms-service>
       <cdi-service></cdi-service>
       <web-container>
@@ -295,7 +296,7 @@
         </transports>
       </network-config>
       <thread-pools>
-        <thread-pool name="admin-thread-pool" min-thread-pool-size="1" max-queue-size="256" max-thread-pool-size="15"></thread-pool>
+        <thread-pool name="admin-thread-pool" min-thread-pool-size="1" max-thread-pool-size="15" max-queue-size="256"></thread-pool>
         <thread-pool name="http-thread-pool"></thread-pool>
         <thread-pool name="thread-pool-1" max-thread-pool-size="200"></thread-pool>
       </thread-pools>
@@ -345,7 +346,7 @@
       </ejb-container>
       <mdb-container></mdb-container>
       <jms-service addresslist-behavior="priority" default-jms-host="default_JMS_host" type="EMBEDDED">
-        <jms-host port="${JMS_PROVIDER_PORT}" host="localhost" name="default_JMS_host"></jms-host>
+        <jms-host port="${JMS_PROVIDER_PORT}" name="default_JMS_host" host="localhost"></jms-host>
       </jms-service>
       <log-service file="${com.sun.aas.instanceRoot}/logs/server.log" log-rotation-limit-in-bytes="2000000">
         <module-log-levels></module-log-levels>
@@ -518,7 +519,7 @@
       <thread-pools>
         <thread-pool name="http-thread-pool"></thread-pool>
         <thread-pool name="thread-pool-1" min-thread-pool-size="2" max-thread-pool-size="200"></thread-pool>
-        <thread-pool name="admin-thread-pool" min-thread-pool-size="1" max-queue-size="256" max-thread-pool-size="15"></thread-pool>
+        <thread-pool name="admin-thread-pool" min-thread-pool-size="1" max-thread-pool-size="15" max-queue-size="256"></thread-pool>
       </thread-pools>
       <group-management-service>
         <failure-detection></failure-detection>
@@ -546,5 +547,18 @@
   </secure-admin>
   <deployment-groups></deployment-groups>
   <clusters></clusters>
-  <applications></applications>
+  <applications>
+    <application context-root="/LoginProject" deployment-time="1601" object-type="user" directory-deployed="true" name="LoginProject-1.0" time-deployed="1613877848370" location="file:/C:/Users/Prahar/Desktop/StFX/Year%204/Term2/CSCI%20483%20-%20Interactive%20Programming%20Java/Workspace/LoginProject/target/LoginProject-1.0/">
+      <property name="archiveType" value="war"></property>
+      <property name="cdiDevModeEnabled" value="false"></property>
+      <property name="defaultAppName" value="LoginProject-1.0"></property>
+      <property name="appLocation" value="file:/C:/Users/Prahar/Desktop/StFX/Year%204/Term2/CSCI%20483%20-%20Interactive%20Programming%20Java/Workspace/LoginProject/target/LoginProject-1.0/"></property>
+      <module name="LoginProject-1.0">
+        <engine sniffer="cdi"></engine>
+        <engine sniffer="jpa"></engine>
+        <engine sniffer="security"></engine>
+        <engine sniffer="web"></engine>
+      </module>
+    </application>
+  </applications>
 </domain>
