@@ -179,16 +179,16 @@ INSERT into esdb.shift (
 ) VALUES (
     '2021-02-22 08:00:00',
     '2021-02-22 17:00:00',
-    2,
-    1
+    1,
+    2
 );
 INSERT into esdb.shift (
     `start_time`, `end_time`, `employee_id_manager`, `employee_id_worker`
 ) VALUES (
     '2021-02-25 08:00:00',
     '2021-02-25 13:00:00',
-    2,
-    1
+    1,
+    2
 );
 
 -- all shifts for kgrimes
@@ -197,16 +197,16 @@ INSERT into esdb.shift (
 ) VALUES (
     '2021-02-23 12:00:00',
     '2021-02-23 17:00:00',
-    3,
-    1
+    1,
+    3
 );
 INSERT into esdb.shift (
     `start_time`, `end_time`, `employee_id_manager`, `employee_id_worker`
 ) VALUES (
     '2021-02-26 08:00:00',
     '2021-02-26 17:00:00',
-    3,
-    1
+    1,
+    3
 );
 
 -- all shifts for swelch
@@ -215,24 +215,24 @@ INSERT into esdb.shift (
 ) VALUES (
     '2021-02-23 10:00:00',
     '2021-02-23 13:00:00',
-    4,
-    1
+    1,
+    4
 );
 INSERT into esdb.shift (
     `start_time`, `end_time`, `employee_id_manager`, `employee_id_worker`
 ) VALUES (
     '2021-02-24 10:00:00',
     '2021-02-24 17:00:00',
-    4,
-    1
+    1,
+    4
 );
 INSERT into esdb.shift (
     `start_time`, `end_time`, `employee_id_manager`, `employee_id_worker`
 ) VALUES (
     '2021-02-25 13:00:00',
     '2021-02-25 17:00:00',
-    4,
-    1
+    1,
+    4
 );
 
 -- all shifts for dmckinney
@@ -241,38 +241,38 @@ INSERT into esdb.shift (
 ) VALUES (
     '2021-02-22 08:00:00',
     '2021-02-22 17:00:00',
-    5,
-    1
+    1,
+    5
 );
 INSERT into esdb.shift (
     `start_time`, `end_time`, `employee_id_manager`, `employee_id_worker`
 ) VALUES (
     '2021-02-23 08:00:00',
     '2021-02-23 17:00:00',
-    5,
-    1
+    1,
+    5
 );
 INSERT into esdb.shift (
     `start_time`, `end_time`, `employee_id_manager`, `employee_id_worker`
 ) VALUES (
     '2021-02-24 08:00:00',
     '2021-02-24 17:00:00',
-    5,
-    1
+    1,
+    5
 );
 INSERT into esdb.shift (
     `start_time`, `end_time`, `employee_id_manager`, `employee_id_worker`
 ) VALUES (
     '2021-02-25 08:00:00',
     '2021-02-25 17:00:00',
-    5,
-    1
+    1,
+    5
 );
 INSERT into esdb.shift (
     `start_time`, `end_time`, `employee_id_manager`, `employee_id_worker`
 ) VALUES (
     '2021-02-26 08:00:00',
     '2021-02-26 17:00:00',
-    5,
-    1
+    1,
+    5
 );
