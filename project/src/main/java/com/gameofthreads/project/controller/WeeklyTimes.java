@@ -17,7 +17,7 @@ import java.util.regex.Pattern;
  * @author Prahar
  */
 public class WeeklyTimes {
-    private class StartEndTimes{
+    public class StartEndTimes{
 
         public StartEndTimes(LocalTime startTime, LocalTime endTime) {
             this.startTime = startTime;

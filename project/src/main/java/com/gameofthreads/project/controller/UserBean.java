@@ -7,12 +7,10 @@ package com.gameofthreads.project.controller;
 
 import java.io.Serializable;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 import org.primefaces.model.timeline.TimelineEvent;
@@ -75,28 +73,31 @@ public class UserBean implements Serializable {
     
     
     public void getShiftTimes(){
-        this.start = LocalDateTime.parse("2021-02-22T00:00:00");
-        this.start = LocalDateTime.parse("2021-02-27T00:00:00");
+        this.start = LocalDateTime.now();
+        this.end = this.start.plusDays(7);
         
-        ArrayList<Shift> shifts = this.employee.getEmployeeShifts();
-        this.model = new TimelineModel<>();
-        
-        for(Shift s: shifts){
-            TimelineEvent e = TimelineEvent.builder()
-                    .startDate(s.getStartTime())
-                    .endDate(s.getEndTime())
-                    .group(this.employee.getName())
-                    .data(s.getShift_id())
-                    .build();
+        try {
+            this.model = dbc.getCompanyShifts(employee.getEmployeeCompany().getCompany_id(), start, end);
             
-            this.model.add(e);
-            System.out.println("Shift " + s.getShift_id() + " added");
-        }
+//        ArrayList<Shift> shifts = this.employee.getEmployeeShifts();
+//        this.model = new TimelineModel<>();
+//        
+//        for(Shift s: shifts){
+//            TimelineEvent e = TimelineEvent.builder()
+//                    .startDate(s.getStartTime())
+//                    .endDate(s.getEndTime())
+//                    .group(this.employee.getName())
+//                    .data(s.getShift_id())
+//                    .build();
+//            
+//            this.model.add(e);
+//            System.out.println("Shift " + s.getShift_id() + " added");
+//        }
             
 //        start = LocalDate.of(-140, 1, 1).atStartOfDay();
 //        end = LocalDate.of(-140, 1, 2).atStartOfDay();
-//        
-//        String[] NAMES = new String[] {"User 1", "User 2", "User 3", "User 4", "User 5", "User 6"};  
+//
+//        String[] NAMES = new String[] {"User 1", "User 2", "User 3", "User 4", "User 5", "User 6"};
 //                
 //        model = new TimelineModel<>();
 //        for (String name : NAMES) {
@@ -106,8 +107,8 @@ public class UserBean implements Serializable {
 //                LocalDateTime start = end.plusHours(Math.round(Math.random() *5));
 //                end = start.plusHours(4 + Math.round(Math.random() *5));
 //
-//                long r = Math.round(Math.random() * 2);  
-//                String availability = (r == 0 ? "Unavailable" : (r == 1 ? "Available" : "Maybe"));  
+//                long r = Math.round(Math.random() * 2);
+//                String availability = (r == 0 ? "Unavailable" : (r == 1 ? "Available" : "Maybe"));
 //  
 //                // create an event with content, start / end dates, editable flag, group name and custom style class
 //                TimelineEvent event = TimelineEvent.builder()
@@ -122,6 +123,9 @@ public class UserBean implements Serializable {
 //                model.add(event);
 //            }  
 //        }  
+        } catch (SQLException ex) {
+            Logger.getLogger(UserBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public TimelineModel<String, ?> getModel() {

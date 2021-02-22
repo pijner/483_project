@@ -11,9 +11,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
+import java.time.DayOfWeek;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.primefaces.model.timeline.TimelineEvent;
+import org.primefaces.model.timeline.TimelineModel;
 
 
 
@@ -78,7 +83,7 @@ public class DBConnector {
         while (result.next()){
             queriedCompany.setCompany_id(result.getInt("company_id"));
             queriedCompany.setCompany_name(result.getString("company_name"));
-            queriedCompany.setCompany_name(result.getString("regular_hours"));
+            queriedCompany.setCompany_hours(new WeeklyTimes(result.getString("regular_hours")));
             
             return queriedCompany;
         }
@@ -210,5 +215,64 @@ public class DBConnector {
         return queriedEmployee;
     }
     
-    
+    public TimelineModel<String, ?> getCompanyShifts(Integer companyID, LocalDateTime startDate, LocalDateTime endDate) throws SQLException{
+        TimelineModel<String, ?> model = new TimelineModel<>();
+        
+        Statement myStatement = this.getStatement();
+        String query = String.format(
+                "SELECT employee_id, employee_name FROM employee WHERE "
+                        + "company_id = %d;", 
+                companyID);
+        
+        ResultSet result = myStatement.executeQuery(query);
+        
+        while (result.next()){
+            Integer employeeID = result.getInt("employee_id");
+            
+            Employee currentEmployee = this.getEmployeeByID(employeeID, companyID);
+            
+            // Add availablity
+            LocalDateTime currentDate = startDate;
+            long numDays = startDate.until(endDate, ChronoUnit.DAYS);
+            for(long i=0; i<numDays; i++){
+                String day = currentDate.getDayOfWeek().toString().toLowerCase();
+                day = day.substring(0, 1).toUpperCase() + day.substring(1);
+                
+                ArrayList<WeeklyTimes.StartEndTimes> availablity = currentEmployee.getAvailable_hours().getTimesOnDay(day);
+                for(WeeklyTimes.StartEndTimes currentAvailablity: availablity){
+                    LocalDateTime availablityStart = currentAvailablity.getStartTime().atDate(currentDate.toLocalDate());
+                    LocalDateTime availablityEnd = currentAvailablity.getEndTime().atDate(currentDate.toLocalDate());
+                    
+                    TimelineEvent e = TimelineEvent.builder()
+                            .startDate(availablityStart)
+                            .endDate(availablityEnd)
+                            .group(currentEmployee.getName())
+                            .data("Available")
+                            .build();
+            
+                    model.add(e);
+                }
+                
+                currentDate = currentDate.plusDays(1);
+            }
+            
+            ArrayList<Shift> thisEmpShifts = currentEmployee.getEmployeeShifts();
+            for(Shift s: thisEmpShifts){
+                
+                if(s.getStartTime().isAfter(endDate) || s.getEndTime().isBefore(startDate))
+                    continue;
+                
+                TimelineEvent e = TimelineEvent.builder()
+                        .startDate(s.getStartTime())
+                        .endDate(s.getEndTime())
+                        .group(currentEmployee.getName())
+                        .data("Scheduled")
+                        .build();
+
+                model.add(e);
+            }
+        }
+        
+        return model;
+    }
 }
