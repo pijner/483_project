@@ -51,9 +51,13 @@ public class DBConnector {
     
     public Statement getStatement(){
         MysqlDataSource dataSource = new MysqlDataSource();
-        dataSource.setServerName(this.serverName);
-        dataSource.setPortNumber(this.portNumber);
-        dataSource.setDatabaseName(this.databaseName);
+        
+//        dataSource.setServerName(this.serverName);
+//        dataSource.setPortNumber(this.portNumber);
+//        dataSource.setDatabaseName(this.databaseName);
+
+        // Temporary Solution
+        dataSource.setURL("jdbc:mysql://localhost:3306/esdb?useSSL=false");
         dataSource.setUser(this.user);
         dataSource.setPassword(this.password);
         
@@ -244,10 +248,11 @@ public class DBConnector {
                     LocalDateTime availablityEnd = currentAvailablity.getEndTime().atDate(currentDate.toLocalDate());
                     
                     TimelineEvent e = TimelineEvent.builder()
+                            .data("Available")
                             .startDate(availablityStart)
                             .endDate(availablityEnd)
                             .group(currentEmployee.getName())
-                            .data("Available")
+                            .styleClass("available")
                             .build();
             
                     model.add(e);
@@ -263,10 +268,11 @@ public class DBConnector {
                     continue;
                 
                 TimelineEvent e = TimelineEvent.builder()
+                        .data("Scheduled")
                         .startDate(s.getStartTime())
                         .endDate(s.getEndTime())
                         .group(currentEmployee.getName())
-                        .data("Scheduled")
+                        .styleClass("scheduled")
                         .build();
 
                 model.add(e);
