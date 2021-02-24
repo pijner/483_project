@@ -1,4 +1,4 @@
-/* AUTOMATICALLY GENERATED ON Sun Feb 21 16:26:27 AST 2021*/
+/* AUTOMATICALLY GENERATED ON Sun Feb 21 16:26:33 AST 2021*/
 /* DO NOT EDIT */
 
 grant {
@@ -9,9 +9,8 @@ grant {
 grant      principal * * {
   permission javax.security.jacc.WebRoleRefPermission "jsp", "**";
   permission javax.security.jacc.WebRoleRefPermission "", "**";
-  permission javax.security.jacc.WebRoleRefPermission "microprofile-metrics-resource", "**";
-  permission javax.security.jacc.WebRoleRefPermission "fish.payara.microprofile.openapi.impl.rest.app.OpenApiApplication", "**";
+  permission javax.security.jacc.WebRoleRefPermission "Faces Servlet", "**";
+  permission javax.security.jacc.WebRoleRefPermission "com.pijner.loginproject.JAXRSConfiguration", "**";
   permission javax.security.jacc.WebRoleRefPermission "default", "**";
-  permission javax.security.jacc.WebRoleRefPermission "microprofile-healthcheck-servlet", "**";
 };
 

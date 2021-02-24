@@ -53,16 +53,21 @@
     <managed-scheduled-executor-service object-type="system-all" jndi-name="concurrent/__defaultManagedScheduledExecutorService"></managed-scheduled-executor-service>
     <connector-connection-pool resource-adapter-name="jmsra" max-pool-size="250" steady-pool-size="1" name="jms/__defaultConnectionFactory-Connection-Pool" connection-definition-name="javax.jms.ConnectionFactory"></connector-connection-pool>
     <connector-resource pool-name="jms/__defaultConnectionFactory-Connection-Pool" object-type="system-all-req" jndi-name="jms/__defaultConnectionFactory"></connector-resource>
+    <context-service object-type="system-all" jndi-name="concurrent/__defaultContextService"></context-service>
+    <managed-thread-factory object-type="system-all" jndi-name="concurrent/__defaultManagedThreadFactory"></managed-thread-factory>
   </resources>
   <servers>
     <server config-ref="server-config" name="server">
       <application-ref ref="__admingui" virtual-servers="__asadmin"></application-ref>
+      <application-ref ref="LoginProject-1.0" virtual-servers="server"></application-ref>
       <resource-ref ref="jdbc/__TimerPool"></resource-ref>
       <resource-ref ref="jdbc/__default"></resource-ref>
       <resource-ref ref="jdbc/sample"></resource-ref>
       <resource-ref ref="concurrent/__defaultManagedExecutorService"></resource-ref>
       <resource-ref ref="concurrent/__defaultManagedScheduledExecutorService"></resource-ref>
       <resource-ref ref="jms/__defaultConnectionFactory"></resource-ref>
+      <resource-ref ref="concurrent/__defaultContextService"></resource-ref>
+      <resource-ref ref="concurrent/__defaultManagedThreadFactory"></resource-ref>
     </server>
   </servers>
   <nodes>
@@ -125,6 +130,20 @@
       <jms-service default-jms-host="default_JMS_host" type="EMBEDDED">
         <jms-host port="${JMS_PROVIDER_PORT}" name="default_JMS_host" host="localhost"></jms-host>
       </jms-service>
+      <cdi-service></cdi-service>
+      <web-container>
+        <session-config>
+          <session-manager>
+            <store-properties></store-properties>
+            <manager-properties></manager-properties>
+          </session-manager>
+          <session-properties></session-properties>
+        </session-config>
+      </web-container>
+      <ejb-container>
+        <ejb-timer-service></ejb-timer-service>
+      </ejb-container>
+      <rest-config></rest-config>
       <diagnostic-service></diagnostic-service>
       <security-service>
         <auth-realm classname="com.sun.enterprise.security.auth.realm.file.FileRealm" name="admin-realm">
@@ -528,5 +547,18 @@
   </secure-admin>
   <deployment-groups></deployment-groups>
   <clusters></clusters>
-  <applications></applications>
+  <applications>
+    <application context-root="/LoginProject" deployment-time="1601" object-type="user" directory-deployed="true" name="LoginProject-1.0" time-deployed="1613877848370" location="file:/C:/Users/Prahar/Desktop/StFX/Year%204/Term2/CSCI%20483%20-%20Interactive%20Programming%20Java/Workspace/LoginProject/target/LoginProject-1.0/">
+      <property name="archiveType" value="war"></property>
+      <property name="cdiDevModeEnabled" value="false"></property>
+      <property name="defaultAppName" value="LoginProject-1.0"></property>
+      <property name="appLocation" value="file:/C:/Users/Prahar/Desktop/StFX/Year%204/Term2/CSCI%20483%20-%20Interactive%20Programming%20Java/Workspace/LoginProject/target/LoginProject-1.0/"></property>
+      <module name="LoginProject-1.0">
+        <engine sniffer="cdi"></engine>
+        <engine sniffer="jpa"></engine>
+        <engine sniffer="security"></engine>
+        <engine sniffer="web"></engine>
+      </module>
+    </application>
+  </applications>
 </domain>
