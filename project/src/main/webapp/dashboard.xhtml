@@ -12,14 +12,13 @@ and open the template in the editor.
     <h:head> 
        <title>Welcome #{user.employee.name}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    </h:head>
-    
-    <style type="text/css">
+        
+        <style type="text/css">
         /* Custom styles for the Timeline */
         div.timeline-frame {
             border-color: #5D99C3;
             border-radius: 5px;
-            background: #000000 !important;
+            background: #ffffff !important;
             /*margin: 10px;*/
         }
 
@@ -107,8 +106,11 @@ and open the template in the editor.
             border-color: #97B0F8 !important;
         }
     </style>
+    </h:head>
     
-    <body>
+    
+    
+    <h:body>
         <p:outputLabel value="Hello #{user.employee.name}"/> <br/>
         <p:outputLabel value="Your company is #{user.employee.employeeCompany.company_name}"/> <br/>
         <p:outputLabel value="Your manager's ID is #{user.employee.managerID}"/> <br/>
@@ -134,5 +136,5 @@ and open the template in the editor.
             </div>
         </h:form>
         
-    </body>
+    </h:body>
 </html>
