@@ -15,7 +15,7 @@ CREATE TABLE IF NOT EXISTS `employee`
 	`employee_name`     VARCHAR(45) NOT NULL,
 	`company_id`        INTEGER NOT NULL,
 	`username`          VARCHAR(45) NOT NULL,
-	`password`          VARCHAR(45) NOT NULL,
+	`password`          VARCHAR(255) NOT NULL,
 	`available_hours`   JSON NOT NULL,
 	`employee_type`     BIT NOT NULL,
 	`other_constraints` JSON NOT NULL,

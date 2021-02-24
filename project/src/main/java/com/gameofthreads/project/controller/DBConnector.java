@@ -177,7 +177,7 @@ public class DBConnector {
         String query = String.format(
                 "SELECT * FROM employee WHERE "
                         + "username = '%s' AND "
-                        + "password = '%s';", 
+                        + "password = (SELECT SHA2('%s', 224));", 
                 username, password);
         
         System.out.println("Using query: " + query);

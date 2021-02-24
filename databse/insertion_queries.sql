@@ -276,3 +276,157 @@ INSERT into esdb.shift (
     1,
     5
 );
+
+
+-- next week's shifts
+INSERT into esdb.shift (
+    `start_time`, `end_time`, `employee_id_manager`, `employee_id_worker`
+) VALUES (
+    '2021-03-01 08:00:00',
+    '2021-03-01 17:00:00',
+    1,
+    1
+);
+INSERT into esdb.shift (
+    `start_time`, `end_time`, `employee_id_manager`, `employee_id_worker`
+) VALUES (
+    '2021-03-02 08:00:00',
+    '2021-03-02 17:00:00',
+    1,
+    1
+);
+INSERT into esdb.shift (
+    `start_time`, `end_time`, `employee_id_manager`, `employee_id_worker`
+) VALUES (
+    '2021-03-03 08:00:00',
+    '2021-03-03 17:00:00',
+    1,
+    1
+);
+INSERT into esdb.shift (
+    `start_time`, `end_time`, `employee_id_manager`, `employee_id_worker`
+) VALUES (
+    '2021-03-04 08:00:00',
+    '2021-03-04 17:00:00',
+    1,
+    1
+);
+INSERT into esdb.shift (
+    `start_time`, `end_time`, `employee_id_manager`, `employee_id_worker`
+) VALUES (
+    '2021-03-05 08:00:00',
+    '2021-03-05 17:00:00',
+    1,
+    1
+);
+
+-- all shifts for jhurst
+INSERT into esdb.shift (
+    `start_time`, `end_time`, `employee_id_manager`, `employee_id_worker`
+) VALUES (
+    '2021-03-01 08:00:00',
+    '2021-03-01 17:00:00',
+    1,
+    2
+);
+INSERT into esdb.shift (
+    `start_time`, `end_time`, `employee_id_manager`, `employee_id_worker`
+) VALUES (
+    '2021-03-04 08:00:00',
+    '2021-03-04 13:00:00',
+    1,
+    2
+);
+
+-- all shifts for kgrimes
+INSERT into esdb.shift (
+    `start_time`, `end_time`, `employee_id_manager`, `employee_id_worker`
+) VALUES (
+    '2021-03-02 12:00:00',
+    '2021-03-02 17:00:00',
+    1,
+    3
+);
+INSERT into esdb.shift (
+    `start_time`, `end_time`, `employee_id_manager`, `employee_id_worker`
+) VALUES (
+    '2021-03-05 08:00:00',
+    '2021-03-05 17:00:00',
+    1,
+    3
+);
+
+-- all shifts for swelch
+INSERT into esdb.shift (
+    `start_time`, `end_time`, `employee_id_manager`, `employee_id_worker`
+) VALUES (
+    '2021-03-02 10:00:00',
+    '2021-03-02 13:00:00',
+    1,
+    4
+);
+INSERT into esdb.shift (
+    `start_time`, `end_time`, `employee_id_manager`, `employee_id_worker`
+) VALUES (
+    '2021-03-03 10:00:00',
+    '2021-03-03 17:00:00',
+    1,
+    4
+);
+INSERT into esdb.shift (
+    `start_time`, `end_time`, `employee_id_manager`, `employee_id_worker`
+) VALUES (
+    '2021-03-04 13:00:00',
+    '2021-03-04 17:00:00',
+    1,
+    4
+);
+
+-- all shifts for dmckinney
+INSERT into esdb.shift (
+    `start_time`, `end_time`, `employee_id_manager`, `employee_id_worker`
+) VALUES (
+    '2021-03-01 08:00:00',
+    '2021-03-01 17:00:00',
+    1,
+    5
+);
+INSERT into esdb.shift (
+    `start_time`, `end_time`, `employee_id_manager`, `employee_id_worker`
+) VALUES (
+    '2021-03-02 08:00:00',
+    '2021-03-02 17:00:00',
+    1,
+    5
+);
+INSERT into esdb.shift (
+    `start_time`, `end_time`, `employee_id_manager`, `employee_id_worker`
+) VALUES (
+    '2021-03-03 08:00:00',
+    '2021-03-03 17:00:00',
+    1,
+    5
+);
+INSERT into esdb.shift (
+    `start_time`, `end_time`, `employee_id_manager`, `employee_id_worker`
+) VALUES (
+    '2021-03-04 08:00:00',
+    '2021-03-04 17:00:00',
+    1,
+    5
+);
+INSERT into esdb.shift (
+    `start_time`, `end_time`, `employee_id_manager`, `employee_id_worker`
+) VALUES (
+    '2021-03-05 08:00:00',
+    '2021-03-05 17:00:00',
+    1,
+    5
+);
+
+
+-- increase password field size to store encrypted passwords
+ALTER TABLE esdb.employee MODIFY `password` VARCHAR(255);
+
+-- encrypt passwords using SHA224
+UPDATE esdb.employee SET `password` = (SELECT SHA2(`password`, 224));
