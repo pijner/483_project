@@ -81,12 +81,12 @@ and open the template in the editor.
             div.available {
                 font-size: 12pt;
                 height: 60px;
-                color: #1a1f3c !important;
+                color: #cce9f6 !important;
                 padding-top: 5px;
                 padding-left: 8px;
                 font-weight: bold;
                 border-radius: 10px !important;
-                background: #CCEACE none !important;
+                background: #cce9f6 none !important;
                 border-color: none !important;
             }
 
@@ -133,7 +133,7 @@ and open the template in the editor.
         <h:form id="form">
             <div class="card">
                 <p:timeline id="timeline" value="#{user.model}"
-                            editable="true" eventMargin="10" eventMarginAxis="0"
+                            editable="true" eventMargin="10" editableGroup="false" eventMarginAxis="0"
                             start="#{user.timelineStart}" end="#{user.timelineEnd}"
                             stackEvents="false" widgetVar="timelineWdgt">
                     <f:facet name="menu">
