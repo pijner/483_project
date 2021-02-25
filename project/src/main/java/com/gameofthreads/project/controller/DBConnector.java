@@ -58,6 +58,7 @@ public class DBConnector {
 
         // Temporary Solution
         dataSource.setURL("jdbc:mysql://localhost:3306/esdb?useSSL=false");
+//        dataSource.setURL("jdbc:mysql://localhost:3306/esdb?allowPublicKeyRetrieval=true&useSSL=false");
         dataSource.setUser(this.user);
         dataSource.setPassword(this.password);
         

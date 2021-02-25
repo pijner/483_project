@@ -8,6 +8,7 @@ package com.gameofthreads.project.controller;
 import java.io.Serializable;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -29,6 +30,8 @@ public class UserBean implements Serializable {
     private final DBConnector dbc = new DBConnector();
     private LocalDateTime start;
     private LocalDateTime end;
+    private LocalDateTime timelineStart;
+    private LocalDateTime timelineEnd;
     private TimelineModel<String, ?> model;
 
     public LocalDateTime getStart() {
@@ -47,6 +50,21 @@ public class UserBean implements Serializable {
         this.end = end;
     }
 
+    public LocalDateTime getTimelineStart() {
+        return timelineStart;
+    }
+
+    public void setTimelineStart(LocalDateTime timelineStart) {
+        this.timelineStart = timelineStart;
+    }
+
+    public LocalDateTime getTimelineEnd() {
+        return timelineEnd;
+    }
+
+    public void setTimelineEnd(LocalDateTime timelineEnd) {
+        this.timelineEnd = timelineEnd;
+    }
     
     public String attemptLogin(String username, String password) {
         try {
@@ -75,6 +93,10 @@ public class UserBean implements Serializable {
     public void getShiftTimes(){
         this.start = LocalDateTime.now();
         this.end = this.start.plusDays(7);
+        
+        // Set Timeline start to be 12:00am day of
+        this.timelineStart = this.start.minus(this.start.getHour(), ChronoUnit.HOURS);
+        this.timelineEnd = this.timelineStart.plusDays(1);
         
         try {
             this.model = dbc.getCompanyShifts(employee.getEmployeeCompany().getCompany_id(), start, end);
