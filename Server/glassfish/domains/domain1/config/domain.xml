@@ -59,6 +59,7 @@
   <servers>
     <server config-ref="server-config" name="server">
       <application-ref ref="__admingui" virtual-servers="__asadmin"></application-ref>
+      <application-ref ref="LoginProject-1.0" virtual-servers="server"></application-ref>
       <application-ref ref="project-1.0-SNAPSHOT" virtual-servers="server"></application-ref>
       <resource-ref ref="jdbc/__TimerPool"></resource-ref>
       <resource-ref ref="jdbc/__default"></resource-ref>
@@ -548,7 +549,19 @@
   <deployment-groups></deployment-groups>
   <clusters></clusters>
   <applications>
-    <application deployment-time="6489" context-root="/project" object-type="user" name="project-1.0-SNAPSHOT" directory-deployed="true" location="file:/C:/Users/Prahar/Documents/GitHub/483_project/project/target/project-1.0-SNAPSHOT/" time-deployed="1611696625672">
+    <application context-root="/LoginProject" deployment-time="1601" object-type="user" directory-deployed="true" name="LoginProject-1.0" time-deployed="1613877848370" location="file:/C:/Users/Prahar/Desktop/StFX/Year%204/Term2/CSCI%20483%20-%20Interactive%20Programming%20Java/Workspace/LoginProject/target/LoginProject-1.0/">
+      <property name="archiveType" value="war"></property>
+      <property name="cdiDevModeEnabled" value="false"></property>
+      <property name="defaultAppName" value="LoginProject-1.0"></property>
+      <property name="appLocation" value="file:/C:/Users/Prahar/Desktop/StFX/Year%204/Term2/CSCI%20483%20-%20Interactive%20Programming%20Java/Workspace/LoginProject/target/LoginProject-1.0/"></property>
+      <module name="LoginProject-1.0">
+        <engine sniffer="cdi"></engine>
+        <engine sniffer="jpa"></engine>
+        <engine sniffer="security"></engine>
+        <engine sniffer="web"></engine>
+      </module>
+    </application>
+    <application deployment-time="1137" context-root="/project" object-type="user" name="project-1.0-SNAPSHOT" directory-deployed="true" location="file:/C:/Users/Prahar/Documents/GitHub/483_project/project/target/project-1.0-SNAPSHOT/" time-deployed="1613947914890">
       <property name="archiveType" value="war"></property>
       <property name="cdiDevModeEnabled" value="false"></property>
       <property name="defaultAppName" value="project-1.0-SNAPSHOT"></property>

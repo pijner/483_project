@@ -13,3 +13,10 @@ Task scheduling is a classic computing problem used to service jobs on a CPU. Th
 
 The goal of using a web platform for this implementation is primarily to make the service accessible across OS platforms and potentially have user accounts for each manager and their employees so the employees can set their constraints for any given week for time off, subject to approval from the manager.
 
+## UI
+
+### PrimeFaces Components
+
+- [Schedule](https://www.primefaces.org/showcase/ui/data/schedule/basic.xhtml?jfwid=a3fe3)
+- [Timeline](https://www.primefaces.org/showcase/ui/data/timeline/allEvents.xhtml?jfwid=a3fe3)
+
