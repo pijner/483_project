@@ -8,7 +8,8 @@ package com.gameofthreads.project.controller;
 
 /**
  *
- * @author Prahar
+ * @author Prahar Ijner
+ * @author Travis MacDonald
  */
 public class Company {
     
