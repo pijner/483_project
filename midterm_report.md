@@ -90,3 +90,17 @@ notes for an employee for a given shift. For example: the shipment is coming in 
 ![Database schema](resources/db_schema.jpg){width=70% style="margin: auto;"}
 
 ## Conclusion and Discussion
+
+Our approach to building EasyShift is to start with the core functionality and expand outward from there. Technically speaking, the timeline is the basis for our project, with all of our features aimed to enhance the schedule.
+
+For core functionality, we implemented a timeline with mock data, using a local database. As a starting point, the calender is read-only, so interacting with the calendar does not alter the underlying data source.
+
+For next steps we plan to setup a landing page that provides users with an overview of what our software offers. Alongside this we also plan to polish up our login page, add a sign-up feature, and implement a more robust user verification workflow.
+
+One of the next big updates will be to make the calendar intractable. This means that users with privileged access (i.e. managers), will be able to make modifications to the schedule that trigger updates to the database. This feature entails that we modify our system to provide different functionalities to employees and managers.
+
+Though the tasks layed out involve a large amount of effort, it is worth considering what this product should include in a real-world setting. 
+
+We believe an parameter based schedule generator would be a great feature for a lot of companies. This would allow managers to create schedules with a click of a button. This feature could also include some sort of metric that shows the number of parameters that could not be satisfied, as well as generate multiple schedules and let the manager pick the best one.
+
+Some other ideal features include a payroll system that tracks actual worked hours; a notification system that notifies all employees of changes that affects them; and a remote database so all employees are operating on the same instance.
