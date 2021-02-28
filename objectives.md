@@ -1,3 +1,0 @@
-# Objectives
-
-- Schedule tasks
