@@ -20,3 +20,11 @@ The goal of using a web platform for this implementation is primarily to make th
 - [Schedule](https://www.primefaces.org/showcase/ui/data/schedule/basic.xhtml?jfwid=a3fe3)
 - [Timeline](https://www.primefaces.org/showcase/ui/data/timeline/allEvents.xhtml?jfwid=a3fe3)
 
+## How to run
+- Before the applicatin is launched, the database needs to be set up. We're using MySQL 8.0.23. The database can be set up using the `create_tables.sql` and `insertion_queries.sql` files in the `database` directory.
+- The connection to the database is established via the `DBConnector.java` class in `project/src/main/java/com/gameofthreads/project/controller`. Make sure to update the constructor in `DBConnector.java` (lines 35 and 36) to reflect the username and password for your MySQL server.
+- The `project/` directory can be opened directly in NetBeans as a project and run.
+
+## Notes
+- The mock data in the sql files included only contains shifts up to March 5th, 2021. If you're running the project after that date, you may not see any shifts populate in the timeline. You should still see the availablity.
+- The login information can be seen in `insertion_queries.sql` (or you can use the account bossperson with password iamboss123).
