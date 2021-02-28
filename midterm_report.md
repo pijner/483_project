@@ -14,6 +14,38 @@ Midterm report for CSCI 483. Written by Travis MacDonald and Prahar Ijner.
 
 ## Introduction
 
+Task scheduling is a process that occurs in most companies on a regular basis. For businesses that employ both part-time and full-time workers, a good schedule can result in better employee satisfaction, customer satisfaction, and minimize company costs. However, manually producing and maintaining physical schedules is a needlessly difficult process that can be simplified using software. For this reason, we aim to create a solution that automates and facilitates the scheduling process, so as to reduce the overhead involved in this process. 
+
+### Background
+
+
+Though the scheduling process may appear trivial upon first glance, a closer look should reveal its laborious nature. Consider how this might look for a small grocery store. The scheduling process in this example could be broken down into three parts.
+
+The first step in creating a schedule involves the consideration of all parameters involved. There are global parameters that apply to all employees (e.g. regular hours of operation), recurrent parameters that apply to individual employees (e.g. some employee is unavailable on Wednesday evenings), and single-occurrence parameters that apply to individuals (e.g. some employee is unavailable on February 1st).
+
+It's important to note that parameters also vary in nature. There are strict parameters that must be upheld, and there are soft parameters that are not necessarily satisfiable. Regular hours of operation, for example, are strict because employees are guaranteed to not work outside of these hours. Requested time off however, is a soft parameter because it cannot be guaranteed. For example, if all employees request the same day off, but the store requires that at least one employee be present, then some employee request cannot be fulfilled.
+
+Once the parameters are in place, the second step is to actually develop the schedule. There are many approaches to do this manually: develop a schedule one employee at a time, or perhaps develop a schedule one day at a time. Regardless of the method, it's important to note that conflicts will arise and revisions must be made; it's an iterative process. It's also worth noting that the resulting schedule may contain errors (e.g. scheduling an employee during their vacation).
+
+The third -- and perhaps most important step -- is the maintenance of the schedule. Of course plans change, and employees may request time off after a schedule has been posted. Unfortunately, a single change might cascade into further conflicts, requiring more time and effort from the scheduler. Likewise, changing an already posted schedule requires that the manager makes sure that all employees involved are up-to-date with the latest schedule.
+
+All in all there is a needless amount of overhead for an intuitively simple task.
+
+
+
+### EasyShift
+
+
+
+Our aim is to create a software scheduling solution that overcomes the main downfalls mentioned above. This software will allow all employees to operate on a shared schedule with position-based access control. We also plan to have future implementations include a feature where schedules can be automatically generated based on given parameters.
+
+EasyShift will address the parameter organization problem by implementing transparent communication. With manual scheduling, managers might forget about an employee's requested time off. With EasyShift, all parameters are visible on the schedule (e.g. requested time off is appears greyed out), meaning that the manager isn't tasked with manually maintaining all of the latest parameters. This will reduce errors when making schedules.
+
+The issue of schedule generation can be solved using scheduling algorithms. Such algorithms have been implemented in operating systems for over 20 years, and although they can't automatically create schedules, they can surely be modified to carry-out this task. This means managers do not have to spend as much time making schedules, ultimately reducing company costs.
+
+Finally EasyShift aims to minimize the difficulty of schedule maintenance. It's clear that revising digital data is much easier than its physical counterpart. On top of this, changes to the schedule could also trigger notifications to all employees involved, meaning that managers are not required to contact all employees manually after a change is made. This ensures that employees are always up-to-date with the latest version of the schedule.
+
+
 ## Website Design
 The EasyShift web application is being developed on JDK 11 and Java EE 8.0 API on the JSF framework. A major component of this project involves user interaction, which is facilitated by \href{https://www.primefaces.org/showcase/index.xhtml?jfwid=e6cde}{PrimeFaces}. For our project, we have chosen PrimeFaces 10.0.0-rc1, which is available via the Maven Central repository. It is an extension of the last stable release of PrimeFaces 8.0 and fully compatible with it. The extension offers better user interaction and more modern-looking elements for the webpage.
 The application currently runs on the \href{https://www.payara.fish/products/payara-server/}{Payara 5.201} application server and uses \href{https://www.mysql.com/products/enterprise/database/}{MySQL 8.0} as the database.
@@ -32,7 +64,7 @@ the password. The submit button is implemented using a command button. When clic
 ![Components of login](resources/login_components.jpg){width=50% style="margin: auto;"}
 
 ### Dashboard
-The dashboard is the first page the user will see after a successful login. It displays the account holder’s name, company, and their manager’s ID, however, more details will be added as the project progresses. By default, it queries the database for shifts and availability of the entire team for 7 days from the current date. This is so that the response time is not very long, and the memory usage is kept to a minimum while ensuring sufficient details are loaded. The shifts and availiblity are displayed using a custom timeline widget from PrimeFaces.
+The dashboard is the first page the user will see after a successful login. It displays the account holder’s name, company, and their manager’s ID, however, more details will be added as the project progresses. By default, it queries the database for shifts and availability of the entire team for 7 days from the current date. This is so that the response time is not very long, and the memory usage is kept to a minimum while ensuring sufficient details are loaded. The shifts and availability are displayed using a custom timeline widget from PrimeFaces.
 
 The widget has been customized using a style sheet for a better visual presentation and distinguishing between availability and scheduled events on the timeline. The timeline is also customized to zoom into the events of the current day as we found it was more convenient to view current events and the time markers are more specific at this zoom level. The can view the other loaded shifts using the arrow buttons at the top right corner of the timeline widget. The future iteration of this will involve querying the database for shifts and availability when the arrows are clicked.
 
