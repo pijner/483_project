@@ -30,10 +30,10 @@ public class DBConnector {
     private final MysqlDataSource dataSource;
 
     public DBConnector(){
-        this.serverName = "localhost";
+        this.serverName = "mysqlserver";
         this.portNumber = 3306;
         this.user = "root";
-        this.password = "dbPassword";
+        this.password = "password123";
         this.databaseName = "esdb";
         this.dataSource = new MysqlDataSource();
         connectDataSource();
