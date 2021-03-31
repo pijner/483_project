@@ -25,6 +25,12 @@ The goal of using a web platform for this implementation is primarily to make th
 - The connection to the database is established via the `DBConnector.java` class in `project/src/main/java/com/gameofthreads/project/controller`. Make sure to update the constructor in `DBConnector.java` (lines 35 and 36) to reflect the username and password for your MySQL server.
 - The `project/` directory can be opened directly in NetBeans as a project and run.
 
+## Docker run
+- Open the main directory in terminal
+- Type the command `docker-compose up`
+- Once the servers are up and running, open a browser and go to `http://localhost:8080/project-1.0-SNAPSHOT/`
+- Run `docker-compose down` to stop servers
+
 ## Notes
 - The mock data in the sql files included only contains shifts up to March 5th, 2021. If you're running the project after that date, you may not see any shifts populate in the timeline. You should still see the availablity.
 - The login information can be seen in `insertion_queries.sql` (or you can use the account bossperson with password iamboss123).
