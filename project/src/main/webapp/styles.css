@@ -1,0 +1,203 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Apr. 2, 2021, 5:19:01 p.m.
+    Author     : Prahar
+*/
+
+/* Custom styles for the Timeline */
+body {
+    background: #576574;
+}
+
+body .ui-card {
+    background: #2c3e50; 
+    color: whitesmoke;
+}
+
+body .ui-panelgrid .ui-panelgrid-cell {
+    border: none;
+    background: transparent;
+    color: whitesmoke;
+}
+
+div.timeline-frame {
+    border-color: #ffffff;
+    border-radius: 5px;
+    background: #ffffff !important;
+    /*margin: 10px;*/
+}
+
+div.vis-group {
+    background-color: #2c3e50;
+    border-color: #f5f6fa
+}
+
+div.vis-background{
+    background: #34495e;
+}
+
+div.vis-panel.vis-center, .vis-panel.vis-top, .vis-panel.vis-bottom{
+    border-left-style: none;
+    border-right-style: none;
+}
+
+div.vis-item-content {
+    color: #ffffff !important;
+    font-family: sans-serif;
+}
+
+div.vis-label.vis-group-level-0 {
+    color: #ffffff;
+    font-weight: bold;
+    background: #34495e;
+    margin: 0px 46px 0px 0px;
+    text-align: right;
+}
+
+div.vis-inner {
+    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+    margin: auto;
+}
+
+div.timeline-axis {
+    border-color: #5D99C3;
+    background-color: #5D99C3;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#5D99C3', endColorstr='#3A6DA0') alpha(opacity=100);
+    background: -webkit-gradient(linear, left top, left bottom, from(#5D99C3), to(#3A6DA0));
+    background: -moz-linear-gradient(top, #5D99C3, #3A6DA0);
+    -khtml-opacity: 1;
+    -moz-opacity: 1;
+    opacity: 1;
+}
+
+div.timeline-groups-axis {
+    border-color: #ff0000;
+
+}
+
+div.timeline-groups-axis-onleft {
+    background: #000000 !important;
+    color: black !important;
+    padding: 20px;
+    border-style: none solid none none;
+}
+
+div.timeline-axis-text {
+    background: #000000 !important;
+    color: black;
+}
+
+div.timeline-event {
+    background: #000000;
+    min-height: 60px;
+    color: black;
+    border-radius: 5px;
+}
+
+div.timeline-event-content {
+    background: #000000;
+    min-height: 60px;
+    padding: 5px;
+    text-shadow: none;
+    border: none;
+}
+
+div.available {
+    font-size: 12pt;
+    height: 60px;
+    padding-top: 5px;
+    padding-left: 8px;
+    /*                font-weight: bold;*/
+    border-radius: 10px !important;
+    background: rgba(52, 152, 219,0.3) !important;
+    border: none !important;
+}
+
+div.unavailable {
+    font-size: 0pt;
+    height: 60px;
+    padding-top: 5px !important;
+    padding-left: 5px;
+    margin: 0 0;
+    margin: 0px !important;
+    font-weight: bold;
+    border-radius: 0px !important;
+    background: #888888 none !important;
+    border-color: none !important;
+}
+
+div.scheduled {
+    font-size: 12pt !important;
+    height: 60px;
+    color: #1a1f3c !important;
+    padding-top: 5px;
+    padding-left: 8px;
+    font-weight: bold;
+    border-radius: 10px !important;
+    background: #16a085 none !important;
+    border: none !important;
+}
+
+div.timeline-event-selected {
+    background: #BECEFE none !important;
+    border-color: #97B0F8 !important;
+}
+
+
+.flo .ui-tabmenuitem:last-child {
+    float: right!important;
+    color: red;
+}
+
+body .ui-tabmenu .ui-tabmenu-nav .ui-tabmenuitem a {
+    color: #dfe6e9;
+    padding: 1rem;
+    font-weight: 700;
+    display: block;
+    line-height: 1;
+    outline: 0 none; 
+}
+
+body .vis-timeline .vis-time-axis .vis-text{
+    color: #ecf0f1;
+}
+
+body .vis-timeline {
+    border-color: #34495e;
+}
+
+body .ui-inputfield {
+    background: #34495e;
+    color: whitesmoke;
+    border: none;
+}
+
+body .ui-dialog .ui-dialog-content {
+    background: #222f3e;
+    color: whitesmoke;
+}
+
+body .ui-dialog .ui-dialog-titlebar {
+    background: #222f3e;
+    color: whitesmoke;
+}
+
+body .ui-selectonemenu .ui-selectonemenu-label {
+    background: #34495e;
+    color: whitesmoke;
+    border: none;
+}
+
+body .ui-datatable .ui-datatable-data > tr {
+    background: transparent;
+    color: whitesmoke;
+}
+
+body .ui-datatable thead th {
+    background: #2c3e50;
+    color: whitesmoke;
+}

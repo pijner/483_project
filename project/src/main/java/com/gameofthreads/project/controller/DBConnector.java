@@ -30,10 +30,10 @@ public class DBConnector {
     private final MysqlDataSource dataSource;
 
     public DBConnector(){
-        this.serverName = "mysqlserver";
+        this.serverName = "localhost";
         this.portNumber = 3306;
         this.user = "root";
-        this.password = "password123";
+        this.password = "dbPassword";
         this.databaseName = "esdb";
         this.dataSource = new MysqlDataSource();
         connectDataSource();
@@ -50,11 +50,6 @@ public class DBConnector {
     }
     
     public final void connectDataSource(){
-//        dataSource.setServerName(this.serverName);
-//        dataSource.setPortNumber(this.portNumber);
-//        dataSource.setDatabaseName(this.databaseName);
-
-        // Temporary Solution
         String url = String.format(
                 "jdbc:mysql://%s:%d/%s?allowPublicKeyRetrieval=true&useSSL=false",
                 this.serverName,
@@ -286,6 +281,40 @@ public class DBConnector {
         return queriedEmployee;
     }
     
+    public ArrayList<Employee> getEmployeesInCompany(Integer companyID){
+        Connection dbConnection = null;
+        Statement dbStatement = null;
+        ResultSet result = null;
+        ArrayList<Employee> employees = null;
+        
+        try {
+            dbConnection = dataSource.getConnection();
+            dbStatement = dbConnection.createStatement();
+            String query = String.format(
+                    "SELECT employee_id, employee_name FROM employee WHERE "
+                            + "company_id = %d;", 
+                    companyID);
+
+            result = dbStatement.executeQuery(query);
+            
+            employees = new ArrayList<>();
+            
+            while (result.next()){
+                Integer employeeID = result.getInt("employee_id");
+
+                Employee currentEmployee = this.getEmployeeByID(employeeID, companyID);
+                employees.add(currentEmployee);
+        
+            
+            }
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(DBConnector.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return employees;
+    }
+    
     public TimelineModel<String, ?> getCompanyShifts(Integer companyID, LocalDateTime startDate, LocalDateTime endDate) throws SQLException{
         Connection dbConnection = null;
         Statement dbStatement = null;
@@ -325,7 +354,8 @@ public class DBConnector {
                                 .data("Available")
                                 .startDate(availablityStart)
                                 .endDate(availablityEnd)
-                                .group(currentEmployee.getName())
+                                .group(currentEmployee.getName() + " (ID: " + currentEmployee.getEmployeeID() + ")")
+                                .editable(false)
                                 .styleClass("available")
                                 .build();
 
@@ -342,10 +372,10 @@ public class DBConnector {
                         continue;
 
                     TimelineEvent e = TimelineEvent.builder()
-                            .data("Scheduled")
+                            .data("Scheduled (ID: " + s.getShift_id() + ")")
                             .startDate(s.getStartTime())
                             .endDate(s.getEndTime())
-                            .group(currentEmployee.getName())
+                            .group(currentEmployee.getName() + " (ID: " + currentEmployee.getEmployeeID() + ")")
                             .styleClass("scheduled")
                             .build();
 
@@ -358,5 +388,91 @@ public class DBConnector {
             this.close(result, dbStatement, dbConnection);
         }
         return model;
+    }
+    
+    public ArrayList<Shift> getCompanyShiftsList(Integer companyID, LocalDateTime startDate, LocalDateTime endDate){
+        Connection dbConnection = null;
+        Statement dbStatement = null;
+        ResultSet result = null;
+        ArrayList<Shift> shiftList = null;
+        
+        try {
+            dbConnection = dataSource.getConnection();
+            dbStatement = dbConnection.createStatement();
+            String query = String.format(
+                    "SELECT employee_id, employee_name FROM employee WHERE "
+                            + "company_id = %d;", 
+                    companyID);
+
+            result = dbStatement.executeQuery(query);
+            
+            shiftList = new ArrayList<>();
+            while (result.next()){
+                Integer employeeID = result.getInt("employee_id");
+
+                Employee currentEmployee = this.getEmployeeByID(employeeID, companyID);
+                ArrayList<Shift> thisEmpShifts = currentEmployee.getEmployeeShifts();
+                for(Shift s: thisEmpShifts){
+
+                    if(s.getStartTime().isAfter(endDate) || s.getEndTime().isBefore(startDate))
+                        continue;
+                    
+                    shiftList.add(s);
+                }
+            }
+        } catch (SQLException ex){
+            Logger.getLogger(DBConnector.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            this.close(result, dbStatement, dbConnection);
+        }
+        
+        return shiftList;
+
+    }
+    
+    public void insertShift(Shift s){
+        Connection dbConnection = null;
+        Statement dbStatement = null;
+
+        try {
+            dbConnection = dataSource.getConnection();
+            dbStatement = dbConnection.createStatement();
+            String query = String.format(
+                    "INSERT INTO shift "
+                    + "(start_time, end_time, employee_id_manager, employee_id_worker, notes) "
+                    + "VALUES ('%s', '%s', %d, %d, '%s'); ",
+                    s.getStartTime().toString(),
+                    s.getEndTime().toString(),
+                    s.getEmployee_id_manager(),
+                    s.getEmployee_id_worker(),
+                    s.getNotes()
+            );
+            dbStatement.executeUpdate(query);
+
+        } catch (SQLException ex) {
+            Logger.getLogger(DBConnector.class.getName()).log(Level.SEVERE, null, ex);
+            this.close(null, dbStatement, dbConnection);
+            
+        } 
+    }
+    
+    public void deleteShift(Integer shiftID){
+        Connection dbConnection = null;
+        Statement dbStatement = null;
+
+        try {
+            dbConnection = dataSource.getConnection();
+            dbStatement = dbConnection.createStatement();
+            String query = String.format(
+                    "DELETE FROM shift WHERE(shift_id = %d)",
+                    shiftID
+            );
+            dbStatement.executeUpdate(query);
+
+        } catch (SQLException ex) {
+            Logger.getLogger(DBConnector.class.getName()).log(Level.SEVERE, null, ex);
+            this.close(null, dbStatement, dbConnection);
+            
+        } 
     }
 }

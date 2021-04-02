@@ -7,7 +7,10 @@ import java.time.temporal.ChronoUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
+import javax.servlet.http.HttpSession;
 import org.primefaces.model.timeline.TimelineModel;
 
 /**
@@ -16,17 +19,18 @@ import org.primefaces.model.timeline.TimelineModel;
  * @author Travis MacDonald
  */
 @Named("user")
-@RequestScoped
+@SessionScoped
 public class UserBean implements Serializable {
 
     private Employee employee;
     private final DBConnector dbc = new DBConnector();
-    private LocalDateTime start;
-    private LocalDateTime end;
+    private LocalDateTime start = LocalDateTime.now();
+    private LocalDateTime end = this.start.plusDays(7);
     private LocalDateTime timelineStart;
     private LocalDateTime timelineEnd;
     private TimelineModel<String, ?> model;
-
+    
+    
     public LocalDateTime getStart() {
         return start;
     }
@@ -66,10 +70,10 @@ public class UserBean implements Serializable {
 //                LoginBean lb = (LoginBean) FacesUtils.getManagedBean("loginBean");
                 return null;
             }
-            return "dashboard.xhtml";
+            return "dashboard";
         } catch (SQLException ex) {
             Logger.getLogger(UserBean.class.getName()).log(Level.SEVERE, null, ex);
-            return "login.xhtml";
+            return "login";
         }
     }
 
@@ -84,12 +88,10 @@ public class UserBean implements Serializable {
     
     
     public void getShiftTimes(){
-        this.start = LocalDateTime.now();
-        this.end = this.start.plusDays(7);
-        
         // Set Timeline start to be 12:00am day of
         this.timelineStart = this.start.minus(this.start.getHour(), ChronoUnit.HOURS);
-        this.timelineEnd = this.timelineStart.plusDays(1);
+//        this.timelineEnd = this.timelineStart.plusDays(1);
+        this.timelineEnd = this.end;
         
         try {
             this.model = dbc.getCompanyShifts(employee.getEmployeeCompany().getCompany_id(), start, end);
@@ -98,13 +100,20 @@ public class UserBean implements Serializable {
         }
     }
 
-    public TimelineModel<String, ?> getModel() {
+    public TimelineModel<String, ?> getModel() {   
         this.getShiftTimes();
         return model;
     }
 
     public void setModel(TimelineModel<String, ?> model) {
         this.model = model;
+    }
+    
+    public String logout(){
+        HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+        session.invalidate();
+        
+        return "logout";
     }
 
 }

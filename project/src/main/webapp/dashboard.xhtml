@@ -8,147 +8,32 @@ and open the template in the editor.
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
     <h:head> 
         <title>Welcome #{user.employee.name}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-        <style type="text/css">
-            /* Custom styles for the Timeline */
-            div.timeline-frame {
-                border-color: #5D99C3;
-                border-radius: 5px;
-                background: #ffffff !important;
-                /*margin: 10px;*/
-            }
-
-            div.vis-item-content {
-                color: #1b1f3b !important;
-                font-family: sans-serif;
-            }
-
-            div.vis-label.vis-group-level-0 {
-                
-                margin: 0px 40px 0px 6px;
-            }
-
-            div.vis-inner {
-                font-weight: bold;
-            }
-            
-            div.timeline-axis {
-                border-color: #5D99C3;
-                background-color: #5D99C3;
-                filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#5D99C3', endColorstr='#3A6DA0') alpha(opacity=100);
-                background: -webkit-gradient(linear, left top, left bottom, from(#5D99C3), to(#3A6DA0));
-                background: -moz-linear-gradient(top, #5D99C3, #3A6DA0);
-                -khtml-opacity: 1;
-                -moz-opacity: 1;
-                opacity: 1;
-            }
-
-            div.timeline-groups-axis {
-                border-color: #5D99C3;
-
-            }
-
-            div.timeline-groups-axis-onleft {
-                background: #000000 !important;
-                color: black !important;
-                padding: 20px;
-                border-style: none solid none none;
-            }
-
-            div.timeline-axis-text {
-                background: #000000 !important;
-                color: black;
-            }
-
-            div.timeline-event {
-                background: #000000;
-                min-height: 60px;
-                color: black;
-                border-radius: 5px;
-            }
-
-            div.timeline-event-content {
-                background: #000000;
-                min-height: 60px;
-                padding: 5px;
-                text-shadow: none;
-            }
-
-            div.available {
-                font-size: 12pt;
-                height: 60px;
-                color: #cce9f6 !important;
-                padding-top: 5px;
-                padding-left: 8px;
-                font-weight: bold;
-                border-radius: 10px !important;
-                background: #cce9f6 none !important;
-                border-color: none !important;
-            }
-
-            div.unavailable {
-                font-size: 0pt;
-                height: 60px;
-                padding-top: 5px !important;
-                padding-left: 5px;
-                margin: 0 0;
-                margin: 0px !important;
-                font-weight: bold;
-                border-radius: 0px !important;
-                background: #888888 none !important;
-                border-color: none !important;
-            }
-
-            div.scheduled {
-                font-size: 12pt !important;
-                height: 60px;
-                color: #1a1f3c !important;
-                padding-top: 5px;
-                padding-left: 8px;
-                font-weight: bold;
-                border-radius: 10px !important;
-                background: #CCEACE none !important;
-                border-color: none !important;
-            }
-
-            div.timeline-event-selected {
-                background: #BECEFE none !important;
-                border-color: #97B0F8 !important;
-            }
-        </style>
+        <link rel="stylesheet" href="styles.css"/>
     </h:head>
 
 
 
     <h:body>
-        <p:outputLabel value="Hello #{user.employee.name}"/> <br/>
-        <p:outputLabel value="Your company is #{user.employee.employeeCompany.company_name}"/> <br/>
-        <p:outputLabel value="Your manager's ID is #{user.employee.managerID}"/> <br/>
-
-
-        <h:form id="form">
-            <div class="card">
-                <p:timeline id="timeline" value="#{user.model}"
-                            editable="true" eventMargin="10" editableGroup="false" eventMarginAxis="0"
-                            start="#{user.timelineStart}" end="#{user.timelineEnd}"
-                            stackEvents="false" widgetVar="timelineWdgt">
-                    <f:facet name="menu">
-                        <p:commandButton type="button" icon="pi pi-chevron-left" styleClass="p-ml-2" onclick="PF('timelineWdgt').move(-0.3);" />
-                        <p:commandButton type="button" icon="pi pi-chevron-right" styleClass="p-ml-2" onclick="PF('timelineWdgt').move(0.3);" />
-                        <p:commandButton type="button" icon="pi pi-search-minus" styleClass="p-ml-2" onclick="PF('timelineWdgt').zoom(-0.5);" />
-                        <p:commandButton type="button" icon="pi pi-search-plus" styleClass="p-ml-2" onclick="PF('timelineWdgt').zoom(0.5);" />
-                    </f:facet>
-
-                    <f:facet name="loading">
-                        <i class="pi pi-spin pi-spinner" style="font-size: 3em"></i>
-                    </f:facet>
-                </p:timeline>
-            </div>
-        </h:form>
+        <ui:include src="/template/dashMenu.xhtml"/>
+        
+        <p:card>
+            <f:facet name="title">
+                Hello #{user.employee.name}!
+            </f:facet>
+            <p:panelGrid columns="2">
+                <p:outputLabel value="Company name:"/>
+                <p:outputLabel value="#{user.employee.employeeCompany.company_name}"/>
+                
+                <p:outputLabel value="Manager's id:"/>
+                <p:outputLabel value="#{user.employee.managerID}"/>
+            </p:panelGrid>
+        </p:card>
 
     </h:body>
 </html>

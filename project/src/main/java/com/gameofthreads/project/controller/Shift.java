@@ -17,6 +17,9 @@ public class Shift {
     private Integer employee_id_manager;
     private String notes;
 
+    public Shift() {
+    }
+    
     public Integer getShift_id() {
         return shift_id;
     }
