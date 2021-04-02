@@ -28,7 +28,7 @@ The goal of using a web platform for this implementation is primarily to make th
 ## Docker run
 - Open the main directory in terminal
 - Type the command `docker-compose up`
-- Once the servers are up and running, open a browser and go to `http://localhost:8080/project-1.0-SNAPSHOT/`
+- Once the servers are up and running, open a browser and go to [`http://localhost:8080/project-1.0-SNAPSHOT/`](http://localhost:8080/project-1.0-SNAPSHOT/)
 - Run `docker-compose down` to stop servers
 
 ## Notes
