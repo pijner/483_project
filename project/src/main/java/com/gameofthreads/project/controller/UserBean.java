@@ -72,6 +72,12 @@ public class UserBean implements Serializable {
             return "login.xhtml";
         }
     }
+    
+    public String attemptRegistration(String email, String password) {
+        // TODO: should add user to database
+        // TODO: should login and redirect to homepage, OR redirect to login page
+        return null;
+    }
 
     
     public Employee getEmployee() {
