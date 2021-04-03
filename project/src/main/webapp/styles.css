@@ -24,6 +24,14 @@ body .ui-panelgrid .ui-panelgrid-cell {
     color: whitesmoke;
 }
 
+body .ui-datatable .ui-datatable-header {
+    border: none;
+    background: transparent;
+    color: whitesmoke;
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+}
+
 div.timeline-frame {
     border-color: #ffffff;
     border-radius: 5px;

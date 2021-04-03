@@ -21,7 +21,7 @@ and open the template in the editor.
 
     <h:body>
         <ui:include src="/template/dashMenu.xhtml"/>
-        
+
         <p:card>
             <f:facet name="title">
                 Hello #{user.employee.name}!
@@ -29,11 +29,45 @@ and open the template in the editor.
             <p:panelGrid columns="2">
                 <p:outputLabel value="Company name:"/>
                 <p:outputLabel value="#{user.employee.employeeCompany.company_name}"/>
-                
+
                 <p:outputLabel value="Manager's id:"/>
                 <p:outputLabel value="#{user.employee.managerID}"/>
             </p:panelGrid>
+
+            <h:form id="form">                
+
+
+                <p:dataTable value="#{user.employee.available_hours.days}" var="day" style="width: 100%">
+                    <f:facet name="header">
+                        Your current availability
+                        <p:commandButton icon="pi pi-upload" value="Submit changes" rendered="#{!user.editAvailiblity}" actionListener="#{user.updateTimes()}" update=":form" style="margin: 8px; float: right"/>
+                        <p:commandButton icon="pi pi-pencil" value="Edit" rendered="#{!user.editAvailiblity}" actionListener="#{user.setEditAvailiblity(true)}" update=":form" style="margin: 8px; float: right"/>
+                        <p:commandButton icon="pi pi-check" value="Done" rendered="#{user.editAvailiblity}" actionListener="#{user.setEditAvailiblity(false)}" update=":form" style="margin: 8px; float: right"/>
+                    </f:facet>
+                    <p:column style="width: 20%">
+                        <p:outputLabel value="#{day}" style="width: fit-content"/>
+                    </p:column>
+                    <p:column>
+                        <p:dataTable value="#{user.employee.available_hours.getTimesOnDay(day)}" var="row">
+                            <p:commandButton icon="pi pi-plus" actionListener="#{user.setEditAvailiblity(true)}"/>
+                            <p:column headerText="Start time">
+                                <p:datePicker value="#{row.startTime}" style="width: 50%" disabled="#{!user.editAvailiblity}" timeOnly="true" />
+                            </p:column>
+                            <p:column headerText="End time">
+                                <p:datePicker value="#{row.endTime}" style="width: 50%" disabled="#{!user.editAvailiblity}" timeOnly="true"/>
+                            </p:column>
+                            <p:column style="width:10%" rendered="#{user.editAvailiblity}">
+                                <p:commandButton icon="pi pi-minus" actionListener="#{user.employee.available_hours.deleteOnDay(day, row)}" update=":form"/>
+                            </p:column>
+                        </p:dataTable>
+                    </p:column>
+                    <p:column style="width:10%" rendered="#{user.editAvailiblity}">
+                        <p:commandButton icon="pi pi-plus" actionListener="#{user.employee.available_hours.addRowOnDay(day)}" update=":form"/>
+                    </p:column>
+                </p:dataTable>
+            </h:form>
         </p:card>
+
 
     </h:body>
 </html>

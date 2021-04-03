@@ -6,7 +6,6 @@ import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
@@ -29,6 +28,7 @@ public class UserBean implements Serializable {
     private LocalDateTime timelineStart;
     private LocalDateTime timelineEnd;
     private TimelineModel<String, ?> model;
+    private boolean editAvailiblity;
     
     
     public LocalDateTime getStart() {
@@ -108,6 +108,15 @@ public class UserBean implements Serializable {
     public void setModel(TimelineModel<String, ?> model) {
         this.model = model;
     }
+
+    public boolean isEditAvailiblity() {
+        return editAvailiblity;
+    }
+
+    public void setEditAvailiblity(boolean editAvailiblity) {
+        System.out.println("Edit avail set to " + editAvailiblity);
+        this.editAvailiblity = editAvailiblity;
+    }
     
     public String logout(){
         HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
@@ -115,5 +124,13 @@ public class UserBean implements Serializable {
         
         return "logout";
     }
+    
+    public void updateTimes(){
+        this.editAvailiblity = false;
+        DBConnector dbc = new DBConnector();
+        System.out.println(this.employee.getAvailable_hours().toJson());
+        dbc.updateAvailableTimes(this.employee.getEmployeeID(), this.employee.getAvailable_hours().toJson());
+    }
+
 
 }
