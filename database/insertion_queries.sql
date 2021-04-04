@@ -423,10 +423,3 @@ INSERT into esdb.shift (
     1,
     5
 );
-
-
--- increase password field size to store encrypted passwords
-ALTER TABLE esdb.employee MODIFY `password` VARCHAR(255);
-
--- encrypt passwords using SHA224
-UPDATE esdb.employee SET `password` = (SELECT SHA2(`password`, 224));
