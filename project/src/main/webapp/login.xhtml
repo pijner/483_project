@@ -35,17 +35,17 @@ and open the template in the editor.
                     <p:tab title="Register">
                         <p:panel header="Register" style="width: 25em">
                             <span class="ui-float-label" style="margin: 8px; padding: 8px; width: fit-content">
-                                <p:inputText value="#{loginBean.username}"/>
+                                <p:inputText value="#{registerBean.email}"/>
                                 <p:outputLabel for="@previous" value="Email"/>
                             </span>
 
                             <span class="ui-float-label" style="margin-top: 16px!important; margin: 8px;padding: 8px; width: fit-content">
-                                <p:password class="passwordInput" value="#{loginBean.password}"/>
+                                <p:password value="#{registerBean.firstPassword}"/>
                                 <p:outputLabel for="@previous" value="Password"/>
                             </span>
                             
                             <span class="ui-float-label" style="margin-top: 16px!important; margin: 8px;padding: 8px; width: fit-content">
-                                <p:password class="passwordInput" value="#{loginBean.password}"/>
+                                <p:password value="#{registerBean.secondPassword}"/>
                                 <p:outputLabel for="@previous" value="Confirm password"/>
                             </span>
                             <p:commandButton value="Submit" action="#{user.attemptLogin(loginBean.username, loginBean.password)}" style="margin-left: 20px; "/>
