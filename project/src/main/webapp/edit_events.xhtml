@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <h:head> 
+        <title>Welcome #{user.employee.name}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link rel="stylesheet" href="styles.css"/>
+    </h:head>
+
+
+
+    <h:body>
+        <ui:param name="activeIndex" value="2" />
+        <ui:include src="/template/dashMenu.xhtml"/>
+
+        <h:form id="form">
+            <p:card>
+                <h:panelGrid columns="2" style=" margin-bottom: 16px">
+                    <h:column>
+                        <p:outputLabel for="from" value="From" style=" margin-right:8px"/>
+                        <p:datePicker id="from" value="#{user.start}" showButtonBar="true" style=" margin-right:16px;"/>
+
+                        <p:outputLabel for="to" value="To" style=" margin-right:8px"/>
+                        <p:datePicker id="to" value="#{user.end}" showButtonBar="true" style=" margin-right:16px"/>
+                    </h:column>
+                    <p:commandButton value="Update" icon="pi pi-check" update="timeline"/>
+                </h:panelGrid>
+
+                <p:commandButton value="Add shift" oncomplete="PF('addShift').initPosition(); PF('addShift').show()" style=" margin-bottom: 16px; margin-right: 16px; background-color: #00b894; border: none" icon="pi pi-calendar-plus" rendered="#{user.employee.managerAccess}"/>
+                <p:commandButton value="Remove shift" oncomplete="PF('removeShift').initPosition(); PF('removeShift').show()" style=" margin-bottom: 16px; background-color: #d63031; border: none" icon="pi pi-calendar-minus" rendered="#{user.employee.managerAccess}"/>
+
+                <p:timeline id="timeline" value="#{user.model}" var="event"
+                            editable="false" editableTime="false" editableOverrideItems="false" 
+                            eventMargin="10" eventMarginAxis="0"
+                            start="#{user.timelineStart}" end="#{user.timelineEnd}"
+                            stackEvents="true" widgetVar="timelineWdgt" rendered="#{user.employee.managerAccess}">
+
+                    <f:facet name="menu">
+                        <p:commandButton type="button" icon="pi pi-chevron-left" styleClass="p-ml-2" onclick="PF('timelineWdgt').move(-0.3);" style=" margin-right: 4px; background: rgba(255, 255, 255, 0.25); color: #74b9ff; border: none"/>
+                        <p:commandButton type="button" icon="pi pi-chevron-right" styleClass="p-ml-2" onclick="PF('timelineWdgt').move(0.3);" style=" margin-right: 4px; background: rgba(255, 255, 255, 0.25); color: #74b9ff; border: none"/>
+                        <p:commandButton type="button" icon="pi pi-search-minus" styleClass="p-ml-2" onclick="PF('timelineWdgt').zoom(-0.5);" style=" margin-right: 4px; background: rgba(255, 255, 255, 0.25); color: #74b9ff; border: none"/>
+                        <p:commandButton type="button" icon="pi pi-search-plus" styleClass="p-ml-2" onclick="PF('timelineWdgt').zoom(0.5);" style=" margin-right: 4px; background: rgba(255, 255, 255, 0.25); color: #74b9ff; border: none"/>
+                    </f:facet>
+
+                    <f:facet name="loading">
+                        <i class="pi pi-spin pi-spinner" style="font-size: 3em"></i>
+                    </f:facet>
+                </p:timeline>
+            </p:card>
+        </h:form>
+
+        <p:dialog header="Add new shift" widgetVar="addShift" position="center center" showEffect="clip" hideEffect="clip" dynamic="true">
+            <h:form>
+                <h:panelGrid columns="2">
+                    <p:outputLabel value="Employee"/>
+                    <p:selectOneMenu value="#{newShift.selectedEmployee}">
+                        <f:selectItems value="#{newShift.employeeNames}"/>
+                    </p:selectOneMenu>
+
+                    <p:outputLabel value="Shift start"/>
+                    <p:datePicker value="#{newShift.s.startTime}" showButtonBar="true"/>
+
+                    <p:outputLabel value="Shift end"/>
+                    <p:datePicker value="#{newShift.s.endTime}" showButtonBar="true"/>
+
+                    <p:outputLabel value="Notes"/>
+                    <p:inputTextarea value="#{newShift.s.notes}"/>
+
+                </h:panelGrid>
+
+                <p:commandButton value="Add" action="#{newShift.insertShift()}" style="width:100%"/>
+            </h:form>
+
+        </p:dialog>
+
+        <p:dialog header="Remove shift" widgetVar="removeShift" position="center center" showEffect="clip" hideEffect="clip" dynamic="true">
+            <h:form>
+                <p:dataTable value="#{removeShift.listOfShifts}" tableStyle="table-layout: auto;" id="shiftTable" var="row">
+                    <p:column field="shift_id" headerText="Shift ID" />
+                    <p:column field="startTime" headerText="Start time" />
+                    <p:column field="endTime" headerText="End time" />
+                    <p:column field="employee_id_worker" headerText="Person ID on shift"/>
+                    <p:column headerText="" filterable="false">
+                        <p:commandButton value="Delete" update="shiftTable :form:timeline" action="#{removeShift.removeSelected(row)}" style="background: #d63031; border: none;"/>
+                    </p:column>
+                </p:dataTable>
+            </h:form>
+
+        </p:dialog>
+
+    </h:body>
+</html>
