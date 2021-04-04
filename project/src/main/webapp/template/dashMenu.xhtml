@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+
+
+    <h:form>
+        <!--<div class="card" style="text-align: center">-->
+        <p:card style="margin-bottom: 15px; background: #2c3e50">
+            <p:panelGrid style="width: 100%; background: #2c3e50" >
+                <p:row style="background: #2c3e50">
+                    <p:column style="background: #2c3e50; border: none; color: #e17055">
+                        <div style="width: fit-content">
+                            <h1>EasyShift</h1></div>
+                    </p:column>
+
+                    <p:column style="background: #2c3e50; border: none;">
+                        <p:tabMenu activeIndex="#{activeIndex}" style="width: fit-content; float: right;">
+                            <p:menuitem value="Home" icon="pi pi-fw pi-home" action="dashboard" style="background: #2c3e50; border: none; ">
+                                <f:param name="i" value="0"/>
+                            </p:menuitem>
+                            <p:menuitem value="Calendar" icon="pi pi-fw pi-calendar" action="calendar" style="background: #2c3e50; border: none;">
+                                <f:param name="i" value="1"/>
+                            </p:menuitem>
+                            <p:menuitem value="Edit shifts" icon="pi pi-fw pi-pencil" rendered="#{user.employee.managerAccess}" action="edit" style="background: #2c3e50; border: none;">
+                                <f:param name="i" value="2"/>
+                            </p:menuitem>
+                            
+
+                            <p:menuitem value="Logout" icon="pi pi-sign-out" action="#{user.logout()}" style="color: firebrick; background: #2c3e50; border: none;">
+                                <f:param name="i" value="4"/>
+                            </p:menuitem>
+                        </p:tabMenu>
+                    </p:column>
+                </p:row>
+            </p:panelGrid>
+        </p:card>
+        <!--</div>-->
+    </h:form>
+
+</ui:composition>
