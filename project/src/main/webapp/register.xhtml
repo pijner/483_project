@@ -10,31 +10,35 @@ and open the template in the editor.
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
     <h:head>
-        <title>Login Page</title>
+        <title>Register Page</title>
 
         <link rel="stylesheet" href="styles.css"/>
     </h:head>
 
 
     <h:body>
-        <ui:param name="activeIndex" value="0" />
+        <ui:param name="activeIndex" value="1" />
         <ui:include src="/template/loginMenu.xhtml"/>
 
         <div style="margin: auto; padding: auto; alignment-baseline: central">
             <h:form>
-                <p:panel header="Login" style="width: 25em">
+                <p:panel header="Register" style="width: 25em">
                     <span class="ui-float-label" style="margin: 8px; padding: 8px; width: fit-content">
-                        <p:inputText id="userNameInput" value="#{loginBean.username}"/>
-                        <p:outputLabel for="@previous" value="Username"/>
+                        <p:inputText value="#{registerBean.email}"/>
+                        <p:outputLabel for="@previous" value="Email"/>
                     </span>
 
                     <span class="ui-float-label" style="margin-top: 16px!important; margin: 8px;padding: 8px; width: fit-content">
-                        <p:password id="passwordInput" value="#{loginBean.password}"/>
+                        <p:password value="#{registerBean.firstPassword}"/>
                         <p:outputLabel for="@previous" value="Password"/>
+                    </span>
+
+                    <span class="ui-float-label" style="margin-top: 16px!important; margin: 8px;padding: 8px; width: fit-content">
+                        <p:password value="#{registerBean.secondPassword}"/>
+                        <p:outputLabel for="@previous" value="Confirm password"/>
                     </span>
                     <p:commandButton value="Submit" action="#{user.attemptLogin(loginBean.username, loginBean.password)}" style="margin-left: 20px; "/>
                 </p:panel>
-
             </h:form>
         </div>
     </h:body>

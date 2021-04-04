@@ -1,6 +1,8 @@
 package com.gameofthreads.project.controller;
 
+import java.io.Serializable;
 import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
 /**
@@ -9,8 +11,8 @@ import javax.inject.Named;
  * @author Travis MacDonald
  */
 @Named("loginBean")
-@RequestScoped
-public class LoginBean {
+@SessionScoped
+public class LoginBean implements Serializable {
     private String username;
     private String password;
 
