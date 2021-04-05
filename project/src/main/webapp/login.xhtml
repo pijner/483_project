@@ -23,21 +23,29 @@ and open the template in the editor.
         <p:card class="login-card">
             <div style="margin: 0 !important; padding: 0; width: 100%;">
                 <h:form>
-                    <p:panel header="Login" style="width: 25em; margin: auto auto !important;">
+
+                    <div align="center">
+                        <h:outputText class="landing-title" value="Sign in below"/>
+                    </div>
+
+                    <div style="width: 320px; height: 2px; margin: 32px auto; background-color: white;"/>
+                    
+                    <div style="width: 320px; margin: auto auto !important;">
+
                         <span class="ui-float-label" style="margin: 8px; padding: 8px; width: fit-content">
                             <p:inputText id="userNameInput" style="width: 100%;" value="#{loginBean.username}"/>
-                            <p:outputLabel for="@previous" style="width: 100%;" value="Username"/>
+                            <p:outputLabel for="@previous" style="width: 100%; color: #bbbbbb;" value="Username"/>
                         </span>
 
                         <span class="ui-float-label" style="margin-top: 16px!important; margin: 8px;padding: 8px; width: fit-content">
                             <p:password id="passwordInput" style="width: 100%;" value="#{loginBean.password}"/>
-                            <p:outputLabel for="@previous" value="Password"/>
+                            <p:outputLabel for="@previous" value="Password" style="width: 100%; color: #bbbbbb;"/>
                         </span>
 
                         <div style="padding: 10px;" align="center">
                             <p:commandButton value="Submit" action="#{user.attemptLogin(loginBean.username, loginBean.password)}" class="landing-button"/>
                         </div>
-                    </p:panel>
+                    </div>
 
                 </h:form>
             </div>
