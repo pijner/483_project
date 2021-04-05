@@ -15,15 +15,12 @@ The goal of using a web platform for this implementation is primarily to make th
 
 ## UI
 
+`TODO`
+
 ### PrimeFaces Components
 
 - [Schedule](https://www.primefaces.org/showcase/ui/data/schedule/basic.xhtml?jfwid=a3fe3)
 - [Timeline](https://www.primefaces.org/showcase/ui/data/timeline/allEvents.xhtml?jfwid=a3fe3)
-
-## How to run
-- Before the applicatin is launched, the database needs to be set up. We're using MySQL 8.0.23. The database can be set up using the `create_tables.sql` and `insertion_queries.sql` files in the `database` directory.
-- The connection to the database is established via the `DBConnector.java` class in `project/src/main/java/com/gameofthreads/project/controller`. Make sure to update the constructor in `DBConnector.java` (lines 35 and 36) to reflect the username and password for your MySQL server.
-- The `project/` directory can be opened directly in NetBeans as a project and run.
 
 ## Docker run
 - Open the main directory in terminal
