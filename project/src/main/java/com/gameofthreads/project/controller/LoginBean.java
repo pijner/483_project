@@ -19,6 +19,8 @@ public class LoginBean implements Serializable {
     private String password = "";
     private boolean loginError = false;
     private String errorMessage = "fuck jsf";
+    
+    private DBConnector dbConnector;
 
     public String getUsername() {
         return username;
@@ -53,15 +55,18 @@ public class LoginBean implements Serializable {
             setLoginError("Please enter a username.");
             return "login";
         }
-        else if (password.isEmpty()) {
+        if (password.isEmpty()) {
             setLoginError("Please enter a password.");
             return "login";
         }
-        else if (!usernameExistsInDatabase()) {
-            setLoginError("Unrecognized username.");
+        
+        dbConnector = new DBConnector();
+        
+        if (!usernameExistsInDatabase()) {
+            setLoginError("Username does not exist.");
             return "login";
         }
-        else if (!namePassIsValid()) {
+        if (!namePassIsValid()) {
             setLoginError("Incorrect password.");
             return "login";
         }
@@ -76,8 +81,7 @@ public class LoginBean implements Serializable {
     }
     
     private boolean usernameExistsInDatabase() {
-        
-        return true;
+        return dbConnector.usernameExists(username);
     }
     
     private boolean namePassIsValid() {

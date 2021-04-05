@@ -6,7 +6,6 @@ import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
@@ -29,10 +28,7 @@ public class UserBean implements Serializable {
     private LocalDateTime timelineStart;
     private LocalDateTime timelineEnd;
     private TimelineModel<String, ?> model;
-    private boolean editAvailiblity;
-    
-//    @ManagedProperty("#{loginBean}")
-//    private LoginBean loginBean;
+    private boolean editAvailiblity; 
     
     public LocalDateTime getStart() {
         return start;

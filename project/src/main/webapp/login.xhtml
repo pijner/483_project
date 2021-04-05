@@ -28,11 +28,12 @@ and open the template in the editor.
                         <h:outputText class="landing-title" value="Sign in below"/>
                     </div>
 
-                    <div style="width: 320px; height: 2px; margin: 32px auto; background-color: white;"/>
+                    <div style="width: 320px; height: 2px; margin: 28px auto; background-color: white;"/>
 
                     <div style="width: 320px; margin: auto auto !important;">
-                        <div style="height: 20px;" align="center">
+                        <div style="height: fit-content" align="center">
                             <h:outputText class="submit-error" value="#{loginBean.errorMessage}" rendered="#{loginBean.loginError}"/>
+                            <div style="height: 20px;"/>
                         </div>
 
                         <span class="ui-float-label" style="margin: 8px; padding: 8px; width: fit-content">

@@ -498,4 +498,28 @@ public class DBConnector {
             this.close(null, dbStatement, dbConnection);
         }
     }
+
+    public boolean usernameExists(String username) {
+        Connection dbConnection = null;
+        Statement dbStatement = null;
+
+        try {
+            dbConnection = dataSource.getConnection();
+            dbStatement = dbConnection.createStatement();
+            String query = String.format(
+                    "SELECT * FROM employee WHERE username = '%s'",
+                    username
+            );
+            
+            ResultSet rs = dbStatement.executeQuery(query);
+            return rs.next();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(DBConnector.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            this.close(null, dbStatement, dbConnection);
+        }
+        return false;
+    }
+
 }
