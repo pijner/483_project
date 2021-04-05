@@ -62,6 +62,12 @@
             <redirect/>
         </navigation-case>
         
+        <navigation-case>
+            <from-outcome>landing</from-outcome>
+            <to-view-id>/landing_page.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        
     </navigation-rule>
         
         
