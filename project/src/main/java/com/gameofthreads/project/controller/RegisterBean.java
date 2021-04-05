@@ -50,4 +50,8 @@ public class RegisterBean implements Serializable {
         // TODO: 2. Check that email is not already taken (i.e. database query)
     }
     
+    public void attemptRegister() {
+        System.out.println("attemptRegister called");
+    }
+    
 }
