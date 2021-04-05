@@ -222,3 +222,7 @@ body .ui-datatable thead th {
     height: 48px;
     font-weight: bold;
 }
+
+.submit-error {
+    color: #e17055;
+}

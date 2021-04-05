@@ -29,8 +29,11 @@ and open the template in the editor.
                     </div>
 
                     <div style="width: 320px; height: 2px; margin: 32px auto; background-color: white;"/>
-                    
+
                     <div style="width: 320px; margin: auto auto !important;">
+                        <div style="height: 20px;" align="center">
+                            <h:outputText class="submit-error" value="#{loginBean.errorMessage}" rendered="#{loginBean.loginError}"/>
+                        </div>
 
                         <span class="ui-float-label" style="margin: 8px; padding: 8px; width: fit-content">
                             <p:inputText id="userNameInput" style="width: 100%;" value="#{loginBean.username}"/>
@@ -43,7 +46,7 @@ and open the template in the editor.
                         </span>
 
                         <div style="padding: 10px;" align="center">
-                            <p:commandButton value="Submit" action="#{user.attemptLogin(loginBean.username, loginBean.password)}" class="landing-button"/>
+                            <p:commandButton value="Submit" action="#{loginBean.attemptLogin}" class="landing-button"/>
                         </div>
                     </div>
 
