@@ -209,3 +209,8 @@ body .ui-datatable thead th {
     background: #2c3e50;
     color: whitesmoke;
 }
+
+.landing-title {
+    font-size: 36px !important;
+    font-weight: bold !important;
+}
