@@ -209,3 +209,20 @@ body .ui-datatable thead th {
     background: #2c3e50;
     color: whitesmoke;
 }
+
+.landing-title {
+    font-size: 36px !important;
+    font-weight: bold !important;
+}
+
+.landing-button {
+    background-color: #e17055 !important;
+    border: none !important;
+    width: 200px;
+    height: 48px;
+    font-weight: bold;
+}
+
+.submit-error {
+    color: #e17055;
+}

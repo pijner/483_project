@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Register Page</title>
+
+        <link rel="stylesheet" href="styles.css"/>
+    </h:head>
+
+
+    <h:body>
+        <ui:param name="activeIndex" value="2" />
+        <ui:include src="/template/loginMenu.xhtml"/>
+
+        <p:card class="login-card">
+            <div style="margin: 0 !important; padding: 0; width: 100%;">
+                <h:form>
+
+                    <div align="center">
+                        <h:outputText class="landing-title" value="Register below"/>
+                    </div>
+
+                    <div style="width: 320px; height: 2px; margin: 32px auto; background-color: white;"/>
+
+                    <div style="width: 320px; margin: auto auto !important;">
+
+                        <div style="height: fit-content" align="center">
+                            <h:outputText class="submit-error" value="#{registerBean.errorMessage}" rendered="#{registerBean.registerError}"/>
+                            <div style="height: 20px;"/>
+                        </div>
+
+                        <span class="ui-float-label" style="margin: 8px; padding: 8px; width: fit-content">
+                            <p:inputText id="nameInput" style="width: 100%;" value="#{registerBean.name}"/>
+                            <p:outputLabel for="@previous" style="width: 100%; color: #bbbbbb;" value="Name"/>
+                        </span>
+
+                        <span class="ui-float-label" style="margin: 8px; padding: 8px; width: fit-content">
+                            <p:inputText id="emailInput" style="width: 100%;" value="#{registerBean.email}"/>
+                            <p:outputLabel for="@previous" style="width: 100%; color: #bbbbbb;" value="Email"/>
+                        </span>
+
+                        <span class="ui-float-label" style="margin-top: 16px!important; margin: 8px;padding: 8px; width: fit-content">
+                            <p:password id="firstPassword" style="width: 100%;" value="#{registerBean.firstPassword}"/>
+                            <p:outputLabel for="@previous" value="Password" style="width: 100%; color: #bbbbbb;"/>
+                        </span>
+
+                        <span class="ui-float-label" style="margin-top: 16px!important; margin: 8px;padding: 8px; width: fit-content">
+                            <p:password id="secondPassword" style="width: 100%;" value="#{registerBean.secondPassword}"/>
+                            <p:outputLabel for="@previous" value="Confirm Password" style="width: 100%; color: #bbbbbb;"/>
+                        </span>
+
+                        <div style="padding: 10px;" align="center">
+                            <p:commandButton value="Submit" action="#{registerBean.attemptRegister}" class="landing-button"/>
+                        </div>
+                    </div>
+
+                </h:form>
+            </div>
+        </p:card>
+
+    </h:body>
+</html>

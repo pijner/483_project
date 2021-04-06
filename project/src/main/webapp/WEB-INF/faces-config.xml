@@ -50,6 +50,24 @@
             <redirect/>
         </navigation-case>
         
+        <navigation-case>
+            <from-outcome>login</from-outcome>
+            <to-view-id>/login.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        
+        <navigation-case>
+            <from-outcome>register</from-outcome>
+            <to-view-id>/register.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        
+        <navigation-case>
+            <from-outcome>landing</from-outcome>
+            <to-view-id>/landing_page.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        
     </navigation-rule>
         
         
