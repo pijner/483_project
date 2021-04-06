@@ -531,7 +531,7 @@ public class DBConnector {
             System.out.println("try block called");
             dbConnection = dataSource.getConnection();
             String query = String.format(
-                    "INSERT into employee VALUES('%s', 1, '%s', SHA2('%s', 224), '{\"Monday\": \"08:00:00-17:00:00\", \"Tuesday\": \"08:00:00-17:00:00\", \"Wednesday\": \"\", \"Thursday\": \"08:00:00-17:00:00\", \"Friday\": \"\", \"Saturday\": \"\", \"Sunday\": \"\"}', 0, '{}', 0, 0, 1)",
+                    "INSERT into employee VALUES('%s', 1, '%s', SHA2('%s', 224), '{\"Monday\": \"\", \"Tuesday\": \"\", \"Wednesday\": \"\", \"Thursday\": \"\", \"Friday\": \"\", \"Saturday\": \"\", \"Sunday\": \"\"}', 0, '{}', 0, 0, 1)",
                     name,
                     username,
                     password
