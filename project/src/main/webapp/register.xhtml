@@ -35,15 +35,16 @@ and open the template in the editor.
 
                         <div style="height: fit-content" align="center">
                             <h:outputText class="submit-error" value="#{registerBean.errorMessage}" rendered="#{registerBean.registerError}"/>
-                            <div style="height: 20px;"/>
                         </div>
+                        
+                        <div style="height: 20px;"/>
 
-                        <span class="ui-float-label" style="margin: 8px; padding: 8px; width: fit-content">
+                        <span class="ui-float-label" style="margin-top: 16px!important; margin: 8px;padding: 8px; width: fit-content">
                             <p:inputText id="nameInput" style="width: 100%;" value="#{registerBean.name}"/>
                             <p:outputLabel for="@previous" style="width: 100%; color: #bbbbbb;" value="Name"/>
                         </span>
 
-                        <span class="ui-float-label" style="margin: 8px; padding: 8px; width: fit-content">
+                        <span class="ui-float-label" style="margin-top: 16px!important; margin: 8px;padding: 8px; width: fit-content">
                             <p:inputText id="emailInput" style="width: 100%;" value="#{registerBean.email}"/>
                             <p:outputLabel for="@previous" style="width: 100%; color: #bbbbbb;" value="Email"/>
                         </span>
