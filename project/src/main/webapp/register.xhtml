@@ -40,6 +40,11 @@ and open the template in the editor.
                         <div style="height: 20px;"/>
 
                         <span class="ui-float-label" style="margin-top: 16px!important; margin: 8px;padding: 8px; width: fit-content">
+                            <p:inputText id="usernameInput" style="width: 100%;" value="#{registerBean.username}"/>
+                            <p:outputLabel for="@previous" style="width: 100%; color: #bbbbbb;" value="Username"/>
+                        </span>
+                        
+                        <span class="ui-float-label" style="margin-top: 16px!important; margin: 8px;padding: 8px; width: fit-content">
                             <p:inputText id="nameInput" style="width: 100%;" value="#{registerBean.name}"/>
                             <p:outputLabel for="@previous" style="width: 100%; color: #bbbbbb;" value="Name"/>
                         </span>
