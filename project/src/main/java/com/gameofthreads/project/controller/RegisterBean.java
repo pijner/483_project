@@ -103,7 +103,7 @@ public class RegisterBean implements Serializable {
         dbConnector.addUser(name, username, firstPassword);
         errorMessage = "";
         registerError = false;
-        return "dashboard";
+        return "login";
     }
 
     private void setRegisterError(String errorMsg) {

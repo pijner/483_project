@@ -74,14 +74,6 @@ public class UserBean implements Serializable {
         }
     }
 
-    public void attemptRegistration(String name, String email, String password) {
-        String username = email.split("@")[0];
-
-        if (dbc.usernameExists(username)) {
-            attemptLogin(username, password);
-        }
-    }
-
     public Employee getEmployee() {
         return employee;
     }
