@@ -16,6 +16,7 @@ import javax.inject.Named;
 @SessionScoped
 public class RegisterBean implements Serializable {
 
+    private String name;
     private String email;
     private String firstPassword;
     private String secondPassword;
@@ -61,7 +62,19 @@ public class RegisterBean implements Serializable {
         this.errorMessage = errorMessage;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public String attemptRegister() {
+        if (name.isEmpty()) {
+            setRegisterError("Please enter your name.");
+            return "register";
+        }
         if (email.isEmpty()) {
             setRegisterError("Please enter an email.");
             return "register";
@@ -87,6 +100,7 @@ public class RegisterBean implements Serializable {
             setRegisterError("Email already exists.");
             return "register";
         }
+        dbConnector.addUser(name, username, firstPassword);
         errorMessage = "";
         registerError = false;
         return "dashboard";

@@ -64,6 +64,7 @@ public class UserBean implements Serializable {
     }
 
     public void attemptLogin(String username, String password) {
+        System.out.println("n: " + username + "; p: " + password);
         try {
             this.employee = dbc.getEmployeeByLogin(username, password);
             if (this.employee.getEmployeeID() == null) {
@@ -73,10 +74,12 @@ public class UserBean implements Serializable {
         }
     }
 
-    public String attemptRegistration(String email, String password) {
-        // TODO: should add user to database
-        // TODO: should login and redirect to homepage, OR redirect to login page
-        return null;
+    public void attemptRegistration(String name, String email, String password) {
+        String username = email.split("@")[0];
+
+        if (dbc.usernameExists(username)) {
+            attemptLogin(username, password);
+        }
     }
 
     public Employee getEmployee() {

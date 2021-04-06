@@ -2,6 +2,7 @@ package com.gameofthreads.project.controller;
 
 import com.mysql.cj.jdbc.MysqlDataSource;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -510,7 +511,7 @@ public class DBConnector {
                     "SELECT * FROM employee WHERE username = '%s'",
                     username
             );
-            
+
             ResultSet rs = dbStatement.executeQuery(query);
             return rs.next();
 
@@ -518,6 +519,32 @@ public class DBConnector {
             Logger.getLogger(DBConnector.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             this.close(null, dbStatement, dbConnection);
+        }
+        return false;
+    }
+
+    public boolean addUser(String name, String username, String password) {
+        System.out.println("addUser called");
+        Connection dbConnection = null;
+        Statement statement = null;
+        try {
+            System.out.println("try block called");
+            dbConnection = dataSource.getConnection();
+            String query = String.format(
+                    "INSERT into employee VALUES('%s', 1, '%s', SHA2('%s', 224), '{\"Monday\": \"08:00:00-17:00:00\", \"Tuesday\": \"08:00:00-17:00:00\", \"Wednesday\": \"\", \"Thursday\": \"08:00:00-17:00:00\", \"Friday\": \"\", \"Saturday\": \"\", \"Sunday\": \"\"}', 0, '{}', 0, 0, 1)",
+                    name,
+                    username,
+                    password
+            );
+            System.out.println("made it here first, " + name + " " + username);
+            statement = dbConnection.createStatement();
+            statement.executeUpdate(query);
+            
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(DBConnector.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            this.close(null, statement, dbConnection);
         }
         return false;
     }
