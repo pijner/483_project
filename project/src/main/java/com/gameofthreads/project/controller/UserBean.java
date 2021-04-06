@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.enterprise.context.SessionScoped;
@@ -28,8 +29,8 @@ public class UserBean implements Serializable {
     private LocalDateTime timelineStart;
     private LocalDateTime timelineEnd;
     private TimelineModel<String, ?> model;
-    private boolean editAvailiblity; 
-    
+    private boolean editAvailiblity;
+
     public LocalDateTime getStart() {
         return start;
     }
@@ -61,30 +62,25 @@ public class UserBean implements Serializable {
     public void setTimelineEnd(LocalDateTime timelineEnd) {
         this.timelineEnd = timelineEnd;
     }
-    
-    public String attemptLogin(String username, String password) {
-//        System.out.println("aoeuhsnaoetnsuhaeosneuth");
-//        System.out.println("hello: " + loginBean.getErrorMessage());
+
+    public void attemptLogin(String username, String password) {
+
+        System.out.println("aoeuhsnaoetnsuhaeosneuth");
         try {
             this.employee = dbc.getEmployeeByLogin(username, password);
-            if(this.employee.getEmployeeID() == null){
-//                LoginBean lb = (LoginBean) FacesUtils.getManagedBean("loginBean");
-                return null;
+            if (this.employee.getEmployeeID() == null) {
             }
-            return "dashboard";
         } catch (SQLException ex) {
             Logger.getLogger(UserBean.class.getName()).log(Level.SEVERE, null, ex);
-            return "login";
         }
     }
-    
+
     public String attemptRegistration(String email, String password) {
         // TODO: should add user to database
         // TODO: should login and redirect to homepage, OR redirect to login page
         return null;
     }
 
-    
     public Employee getEmployee() {
         return employee;
     }
@@ -92,14 +88,13 @@ public class UserBean implements Serializable {
     public void setEmployee(Employee employee) {
         this.employee = employee;
     }
-    
-    
-    public void getShiftTimes(){
+
+    public void getShiftTimes() {
         // Set Timeline start to be 12:00am day of
         this.timelineStart = this.start.minus(this.start.getHour(), ChronoUnit.HOURS);
 //        this.timelineEnd = this.timelineStart.plusDays(1);
         this.timelineEnd = this.end;
-        
+
         try {
             this.model = dbc.getCompanyShifts(employee.getEmployeeCompany().getCompany_id(), start, end);
         } catch (SQLException ex) {
@@ -107,7 +102,7 @@ public class UserBean implements Serializable {
         }
     }
 
-    public TimelineModel<String, ?> getModel() {   
+    public TimelineModel<String, ?> getModel() {
         this.getShiftTimes();
         return model;
     }
@@ -124,20 +119,19 @@ public class UserBean implements Serializable {
         System.out.println("Edit avail set to " + editAvailiblity);
         this.editAvailiblity = editAvailiblity;
     }
-    
-    public String logout(){
+
+    public String logout() {
         HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
         session.invalidate();
-        
+
         return "logout";
     }
-    
-    public void updateTimes(){
+
+    public void updateTimes() {
         this.editAvailiblity = false;
         DBConnector dbc = new DBConnector();
         System.out.println(this.employee.getAvailable_hours().toJson());
         dbc.updateAvailableTimes(this.employee.getEmployeeID(), this.employee.getAvailable_hours().toJson());
     }
-
 
 }

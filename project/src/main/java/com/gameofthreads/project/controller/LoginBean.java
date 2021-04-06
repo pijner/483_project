@@ -1,10 +1,13 @@
 package com.gameofthreads.project.controller;
 
 import java.io.Serializable;
+import java.util.Map;
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -18,7 +21,7 @@ public class LoginBean implements Serializable {
     private String username = "";
     private String password = "";
     private boolean loginError = false;
-    private String errorMessage = "fuck jsf";
+    private String errorMessage = "";
     
     private DBConnector dbConnector;
 
