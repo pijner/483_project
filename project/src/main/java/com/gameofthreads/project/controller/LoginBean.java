@@ -1,7 +1,10 @@
 package com.gameofthreads.project.controller;
 
 import java.io.Serializable;
+import java.sql.SQLException;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
@@ -22,7 +25,7 @@ public class LoginBean implements Serializable {
     private String password = "";
     private boolean loginError = false;
     private String errorMessage = "";
-    
+
     private DBConnector dbConnector;
 
     public String getUsername() {
@@ -62,9 +65,9 @@ public class LoginBean implements Serializable {
             setLoginError("Please enter a password.");
             return "login";
         }
-        
+
         dbConnector = new DBConnector();
-        
+
         if (!usernameExistsInDatabase()) {
             setLoginError("Username does not exist.");
             return "login";
@@ -82,13 +85,19 @@ public class LoginBean implements Serializable {
         errorMessage = errorMsg;
         loginError = true;
     }
-    
+
     private boolean usernameExistsInDatabase() {
         return dbConnector.usernameExists(username);
     }
-    
+
     private boolean namePassIsValid() {
-        return true;
+        try {
+            final Employee employee = dbConnector.getEmployeeByLogin(username, password);
+            return employee.getEmployeeID() != null;
+        } catch (SQLException ex) {
+            Logger.getLogger(UserBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
     }
 
 }

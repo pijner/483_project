@@ -64,8 +64,6 @@ public class UserBean implements Serializable {
     }
 
     public void attemptLogin(String username, String password) {
-
-        System.out.println("aoeuhsnaoetnsuhaeosneuth");
         try {
             this.employee = dbc.getEmployeeByLogin(username, password);
             if (this.employee.getEmployeeID() == null) {
