@@ -32,6 +32,11 @@ and open the template in the editor.
 
                     <div style="width: 320px; margin: auto auto !important;">
 
+                        <div style="height: fit-content" align="center">
+                            <h:outputText class="submit-error" value="#{registerBean.errorMessage}" rendered="#{registerBean.registerError}"/>
+                            <div style="height: 20px;"/>
+                        </div>
+
                         <span class="ui-float-label" style="margin: 8px; padding: 8px; width: fit-content">
                             <p:inputText id="emailInput" style="width: 100%;" value="#{registerBean.email}"/>
                             <p:outputLabel for="@previous" style="width: 100%; color: #bbbbbb;" value="Email"/>
@@ -41,7 +46,7 @@ and open the template in the editor.
                             <p:password id="firstPassword" style="width: 100%;" value="#{registerBean.firstPassword}"/>
                             <p:outputLabel for="@previous" value="Password" style="width: 100%; color: #bbbbbb;"/>
                         </span>
-                        
+
                         <span class="ui-float-label" style="margin-top: 16px!important; margin: 8px;padding: 8px; width: fit-content">
                             <p:password id="secondPassword" style="width: 100%;" value="#{registerBean.secondPassword}"/>
                             <p:outputLabel for="@previous" value="Confirm Password" style="width: 100%; color: #bbbbbb;"/>
