@@ -37,7 +37,7 @@ and open the template in the editor.
                     <p:commandButton value="Update" icon="pi pi-check" update="timeline"/>
                 </h:panelGrid>
 
-                <p:timeline id="timeline" value="#{user.model}"
+                <p:timeline timeZone="America/Anguilla" id="timeline" value="#{user.model}"
                             editable="false" eventMargin="10" editableGroup="false" eventMarginAxis="0"
                             start="#{user.timelineStart}" end="#{user.timelineEnd}"
                             stackEvents="true" widgetVar="timelineWdgt">
