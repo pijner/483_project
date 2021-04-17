@@ -35,7 +35,7 @@ In addition to concepts covered in the course, we researched and implemented the
 
 ## Website design and workflow
 
-![Implemented workflow](../resources/easyShift.png)
+![Implemented workflow](../resources/workflow.jpg)
 
 ### Home page (landing page)
 
@@ -45,9 +45,14 @@ In addition to concepts covered in the course, we researched and implemented the
 
 ### Dashboard-menu
 The dashboard menu is the top bar seen by the user upon login. This consists of navigation links for the pages `dashboard.xhtml`, `calendar.xhtml`, `edit_events.xhtml`, and a logout button. The dashboard menu is defined as a template using the `ui:composition` from JSF-Facelets and included into each of the pages the user interacts with after logging in.
-The dashboard's edit events button is a conditionally rendered element that is displayed only when the logged in user has manager level access.
+The dashboard's edit events button is a conditionally rendered element that is displayed only when the logged in user has manager level access. Figure 2 and 3 show the rendered dashboard menu for users who are managers and those who are not.
 
 *XHTML source*: `project/src/main/webapp/template/dashMenu.xhtml`
+
+![Dashboard-menu for managers](../resources/menu_manager.jpg){ width=50% style="margin: auto;" }
+
+![Dashboard-menu for non-managers](../resources/menu_non_manager.jpg){ width=50% style="margin: auto;" }
+
 
 ### Dashboard home
 The dashboard home is the first page the user sees after successfully logging into EasyShift. This interface displays the user's current company and the ID of their manager.
