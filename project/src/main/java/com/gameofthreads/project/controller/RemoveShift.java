@@ -14,7 +14,8 @@ import javax.inject.Named;
 
 /**
  *
- * @author Prahar
+ * @author Prahar Ijner
+ * @author Travis MacDonald
  */
 @SessionScoped
 @Named()

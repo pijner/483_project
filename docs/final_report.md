@@ -66,12 +66,15 @@ The home page is the first page the user sees. There isn't any particularity int
 
 The only real functionality on this page is the navigation. Users can navigate to the login and register pages by either using the home page buttons, or the PrimeFaces' `<p:tabMenu>` bar at the top. It's worth noting that these three pages share xhtml code for this component code through the `<ui:include>` tag.
 
+*XHTML source*: `project/src/main/webapp/landing_page.xhtml`
+
 ### Login page
 
 The login page is responsible for sending users to the core scheduling functionality. The UI components on this page are pretty simple, consisting mainly of `commandButton`s, `inputText`s, and `password`s. The input fields contain floating placeholders that are provided from PrimeFaces by using the class `ui-float-label`. Basically the placeholder (e.g. "Username") is located inside the component until the user interacts with it, where it then *floats* above the component.
 
 The functionality from this page uses database queries for user verification. When the user clicks the login button, the system will either verify them and navigate to the dashboard page, or show them an error and keep them on the login page. The only successful verification case is when the username exists in the database, and the password matches the one in the database. If either of these conditions fails (including the user leaving the fields blank), then the user is kept on the login page and an error message is shown (e.g. "Incorrect Password").
 
+*XHTML source*: `project/src/main/webapp/login.xhtml`
 
 ### Registration page
 
@@ -81,6 +84,8 @@ A registration attempt is successful when all of the following conditions hold: 
 
 When a registration is successful the user is navigated to the login page and their credentials are added to the database. Similar to the login page, an invalid registration results in the user staying on the page with an error message.
 
+*XHTML source*: `project/src/main/webapp/register.xhtml`
+
 ### Dashboard-menu
 The dashboard menu is the top bar seen by the user upon login. This consists of navigation links for the pages `dashboard.xhtml`, `calendar.xhtml`, `edit_events.xhtml`, and a logout button. The dashboard menu is defined as a template using the `ui:composition` from JSF-Facelets and included into each of the pages the user interacts with after logging in.
 The dashboard's edit events button is a conditionally rendered element that is displayed only when the logged in user has manager level access. Figure 2 and 3 show the rendered dashboard menu for users who are managers and those who are not.
@@ -89,7 +94,7 @@ The dashboard's edit events button is a conditionally rendered element that is d
 
 ![Dashboard-menu for managers](../resources/menu_manager.jpg){ width=50% style="margin: auto;" }
 
-![Dashboard-menu for non-managers](../resources/menu_non_manager.jpg){ width=50% style="margin: auto;" }
+![Dashboard-menu for non-managers](../resources/menu_non_manager.jpg){ width=35% style="margin: auto;" }
 
 
 ### Dashboard home
@@ -128,7 +133,9 @@ To ensure consistent design patterns and colors throughout the web pages, we def
 ### Database
 A database is a critical part of any web application. For EasyShift, we use a database to store all information about employees, companies, and shifts. The database server used is MySQL 8.0. The database schema used is defined in the figure below. It should be noted that the schema contains the table `exception_times` which is a feature not used in the current implementation, but is intended to indicate vacation days or sick days for an employee or a company.
 
-![Database schema](../resources/db_schema.jpg){width=70% style="margin: auto;"}
+The queries used to create the database and insert testing data can be found in `database/create_tables.sql` and `database/insertion_queries.sql` respectively. 
+
+![Database schema](../resources/db_schema.jpg){ width=65% style="margin: auto;" }
 
 ## Future steps
 
@@ -141,3 +148,20 @@ For next steps we plan to implement the ability to users to create and edit comp
 Later on, we believe a parameter based schedule generator is a great feature for a lot of companies. This would allow managers to create schedules with a click of a button. This feature could also include some sort of metric that shows the number of parameters that could not be satisfied, as well as generate multiple schedules and let the manager pick the best one.
 
 Some other ideal features include a payroll system that tracks actual worked hours; a notification system that notifies all employees of changes that affects them; and a remote database so all employees are operating on the same instance.
+
+## Screenshots
+![Home page](../resources/home.jpg){ width=90% style="margin: auto;" }
+
+![Registration page](../resources/register.jpg){ width=90% style="margin: auto;" }
+
+![Login page](../resources/login.jpg){ width=90% style="margin: auto;" }
+
+![Dashboard home](../resources/dashboard.jpg){ width=90% style="margin: auto;" }
+
+![Calendar page](../resources/calendar.jpg){ width=90% style="margin: auto;" }
+
+![Edit shifts page](../resources/edit_shifts.jpg){ width=90% style="margin: auto;" }
+
+![Add shift dialog box](../resources/add_shift.jpg){ width=40% style="margin: auto;" }
+
+![Remove shift dialog box](../resources/remove_shift.jpg){ width=70% style="margin: auto;" }
