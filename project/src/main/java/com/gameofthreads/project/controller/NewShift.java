@@ -18,7 +18,8 @@ import org.primefaces.model.timeline.TimelineEvent;
 
 /**
  *
- * @author Prahar
+ * @author Prahar Ijner
+ * @author Travis MacDonald
  */
 @SessionScoped
 @Named("newShift")
